@@ -29,6 +29,7 @@ function Consultarhorario(){
 
     })
     return(
+        
         <div>
             <label>Consultar Horario </label>
             <br></br>
