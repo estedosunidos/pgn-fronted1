@@ -1,4 +1,5 @@
 export const API_LOGIN ="/login"
+export const API_CHANGEPASS="/changepass/"
 export const API_LOGOUT="/logout/"
 export const API_CARRERA="/carrera"
 export const API_ASIGNATURA="/asignatura"

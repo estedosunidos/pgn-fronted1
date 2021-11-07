@@ -1,21 +1,24 @@
 import React,{useEffect,useState} from "react";
 import  {API_ESTUDIANTE,cabeceras} from "../store/constante"
 import axios from "axios";
-function Consultarhorario(){
+import ConsultarHorario from "../componentes/Horario/ConsultarHorario";
+function Consultarhorario(props){
     const [estudiante,setEstudiante]=useState({Carreras:[]})
-    const [carrera,setCarrera]=useState({})
+    const [carrera,setCarrera]=useState()
+    const [mostrahorario,setMostrahorario]=useState(false)
+    const [horarios,setHorarios]=useState([])
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_ESTUDIANTE+"/documento/"+ documento
         axios.get(url,{headers:cabeceras})
-        .then(repuesta=>{
+        .then((repuesta)=>{
             console.log(repuesta.data)
             let estudiante1=repuesta.data
             if(estudiante1.length>0){
                 setEstudiante(estudiante1[0])
             }
         })
-        .catch(error=>{
+        .catch((error)=>{
             console.log(error)
             alert("El estudiante no fue cargado")
         })
@@ -26,7 +29,17 @@ function Consultarhorario(){
         }
     }
     const consultar=(()=>{
-
+        const url =process.env.REACT_APP_API_URL+API_ESTUDIANTE+"/consultahorario/"+carrera.Id
+        axios.get(url,{headers:cabeceras})
+        .then((repuesta)=>{
+            console.log(repuesta.data)
+            setHorarios(repuesta.data)
+            setMostrahorario(true)
+        })
+        .catch((error)=>{
+            console.log(error)
+            alert("El horario no fue cargado")
+        })
     })
     return(
         
@@ -49,6 +62,7 @@ function Consultarhorario(){
             <br></br>
              <label>Consultar</label>
              <button onClick={consultar}>Consultar Horario</button>
+             {mostrahorario && <ConsultarHorario data={horarios}></ConsultarHorario>}
         </div>
     )
 }

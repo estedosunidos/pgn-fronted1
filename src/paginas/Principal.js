@@ -6,12 +6,14 @@ import React,{useState} from "react";
 import {API_ANUNCIO,cabeceras} from "../store/constante"
 import AnuncioEstudiante from "../componentes/AnuncioEstudiante/AnuncioEstudiante"
 import InformacionAnuncio from "../componentes/AnuncioEstudiante/InformacionAnuncio"
+import ModificarContrasena from "../componentes/Principal/ModificarContrasena";
 function Principal(){
     const nombre_completo =localStorage.getItem("nombre_de_usuario");
     const documento=localStorage.getItem("documento");
    // const foto = JSON.parse(localStorage.getItem("foto"))
     const [mostraanuncio,setMostraanuncio]=useState(false)
     const [mostrainformacion,setMostrainformacion]=useState(false)
+    const [mostracambiodecontrasena,setMostracambiodecontrasena]=useState(false)
     //const [mostracambiocontrasena,setMostracambiocontrasena]=useSate(false)
     const [anuncioestudiante,setAnuncioestudiante]=useState({})
     const salir=(event)=>{
@@ -34,9 +36,16 @@ function Principal(){
         setAnuncioestudiante(mensaje)
         actualizarleido(mensaje)
     })
+    const muestramodal1=(()=>{
+        setMostracambiodecontrasena(true)
+    })
     const anuncioestudiante1=((event)=>{
         event.preventDefault();
         setMostraanuncio(!mostraanuncio)
+    })
+    const actualizarcontrasena=((event)=>{
+        event.preventDefault();
+        setMostracambiodecontrasena(!mostracambiodecontrasena)
     })
     const cancelar=(()=>{
         setMostrainformacion(false)
@@ -63,9 +72,10 @@ function Principal(){
         {/*<img src={"data:image/png;base64," + new Buffer.from(foto).toString("base64")}></img>*/}
         <button onClick={salir}>Salir</button>
         <button onClick={anuncioestudiante1}>Consulta</button>
+        <button onClick={actualizarcontrasena}>Actualizar Contraseña</button>
         { mostraanuncio &&<AnuncioEstudiante estudiante={11} muestramodal={muestramodal}></AnuncioEstudiante>}
         {mostrainformacion && <InformacionAnuncio informacion={anuncioestudiante} cancelar={cancelar}></InformacionAnuncio>}
-       
+        {mostracambiodecontrasena && <ModificarContrasena muestramodal={muestramodal1} documento={documento}></ModificarContrasena>}
         </div>       
     );
 }
