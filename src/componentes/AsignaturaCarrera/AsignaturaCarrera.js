@@ -3,7 +3,7 @@ import  {API_ASIGNATURACARRERA,cabeceras,API_CARRERA} from "../../store/constant
 import axios from "axios";
 import CrearAsignaturaCarrera  from "./CrearAsignaturaCarrera"
 import EditarAsignaturaCarrera  from "./EditarAsignaturaCarrera"
-import Table from "../Table"
+import TableCustom from "../TableCustom"
 function AsignaturaCarrera(props){
     const [editar,setEditar]=useState(false)
     const [appState,setAppState]=useState(false)
@@ -58,9 +58,9 @@ function AsignaturaCarrera(props){
         <div>
         <label>Asignacion de asignartura en el plan de estudio de la carrera</label>
         <button onClick={mostracrearasignaturacarrera}>Nuevo</button>
-        <Table data={asignaturacarreras} borrar={borrarasignaturacarrera} mostrar={mostraeditarasignaturacarrera}></Table>
-        {crear && <CrearAsignaturaCarrera carrera={props.carrera} cancelar={cancelar} crear={crearasignaturacarrera}></CrearAsignaturaCarrera>}
-        {editar && <EditarAsignaturaCarrera cancelar={cancelar}  carrera={props.carrera} asignaturacarrera={asignaturacarrera} editar={editaasignaturacarrera}> </EditarAsignaturaCarrera>}
+        <TableCustom data={asignaturacarreras} borrar={borrarasignaturacarrera} mostrar={mostraeditarasignaturacarrera}></TableCustom>
+        {crear && <CrearAsignaturaCarrera showModal={crear} carrera={props.carrera} cancelar={cancelar} crear={crearasignaturacarrera}></CrearAsignaturaCarrera>}
+        {editar && <EditarAsignaturaCarrera showModal={editar} cancelar={cancelar}  carrera={props.carrera} asignaturacarrera={asignaturacarrera} editar={editaasignaturacarrera}> </EditarAsignaturaCarrera>}
     </div>
     )
 }

@@ -5,12 +5,35 @@ function EditarCarreraEstudiante(props){
     const [carreraestudiante,setCarreraestudiante]=useState({})
     const [carreras,setCarreras]=useState([])
     useEffect(()=>{
-        const url=process.env.REACT_APP_API_URL+API_CARRERA;
-        axios.get(url,{headers:cabeceras})
-        .then(repuesta=>{
-            console.log(repuesta.data);
-            setCarreras(repuesta.data);
-        })
+        const urlcarrera=process.env.REACT_APP_API_URL+API_CARRERA;
+        const urlasignacioncarrera=process.env.REACT_APP_API_URL+API_CARRERA+"/carreraestudiante/"+props.carreraestudiante.idCarrera
+        const axiocarrera= axios.get(urlcarrera,{headers:cabeceras})
+        const axioasignacioncarrera= axios.get(urlasignacioncarrera,{headers:cabeceras})
+        axios.all([axiocarrera,axioasignacioncarrera])
+        .then(axios.spread((...repuestas)=>{
+            repuestas.map((repuesta,index)=>{
+                console.log(repuesta.data)
+                if(index===0){
+                    setCarreras(repuesta.data)
+                }else{
+                    let asignacionestudiante1=repuesta.data
+                    if(asignacionestudiante1.length>0){
+                        console.log(asignacionestudiante1[0])
+                        setCarreraestudiante(asignacionestudiante1[0])
+                    }
+                }
+            })
+        }))
+        .catch(axios.spread((...errores)=>{
+            errores.map((error,index)=>{
+                console.log(error)
+                if (index===0){
+                    alert("La carrera no fueron listada")
+                }else if(index===1){
+                    alert("")
+                }
+            })
+        })) 
     },[]);
     const editarCarreraEstudiante=((event)=>{
         event.preventDefault()

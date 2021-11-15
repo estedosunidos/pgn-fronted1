@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_CORTE,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import CrearCortes from "../componentes/Cortes/CrearCortes"
 import EditarCortes from "../componentes/Cortes/EditarCortes"
 function Registrodecortesacademicos(){
@@ -55,9 +55,9 @@ function Registrodecortesacademicos(){
         <div>
             <h1>Registro de corte academico</h1>
             <button onClick={mostrarcrearcortes}>Nuevo</button>
-           <Table data={cortes} borrar={borrarcorte} mostrar={mostrareditarcorte}></Table>
-           {editar && <EditarCortes cancelar={cancelar} corte={corte} editar={editarcorte}> </EditarCortes>}
-           {crear && <CrearCortes cancelar={cancelar} crear={crearcorte}></CrearCortes>}
+           <TableCustom data={cortes} borrar={borrarcorte} mostrar={mostrareditarcorte}></TableCustom>
+           {editar && <EditarCortes showModal={editar}  cancelar={cancelar} corte={corte} editar={editarcorte}> </EditarCortes>}
+           {crear && <CrearCortes  showModal={crear} cancelar={cancelar} crear={crearcorte}></CrearCortes>}
 
         </div>
     )

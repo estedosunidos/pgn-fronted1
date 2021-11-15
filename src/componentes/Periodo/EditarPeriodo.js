@@ -40,6 +40,7 @@ function EditarPeriodo(props){
             <input type="date" value={periodo.Fecha_Inicio} onChange={handleChange("Fecha_Inicio")}></input>
             <label>Fecha Final</label>
             <input type="date" value={periodo.Fecha_Final} onChange={handleChange("Fecha_Final")}></input>
+            <button  type="submit"> Editar</button>
             </form>
         </div>
     )

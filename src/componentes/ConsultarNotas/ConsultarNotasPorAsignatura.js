@@ -79,9 +79,9 @@ function ConsultarNotasPorAsignatura(props){
                 <label>Total Corte: {nota.totalcorte.Notacorte}</label>
                 </div></div>
             })}
-            <label>Total Promedio Asignatura: {nota.totalpromedioasignatura}</label>
-
-        </div>
+            <label>Total Promedio Asignatura: {nota.totalpromedioasignatura}</label>                                                                                                                                                                                                                                               
+                   
+        </div>                    
     )
 }
 

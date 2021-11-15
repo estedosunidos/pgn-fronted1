@@ -82,7 +82,7 @@ function ResgistroNotas(){
         if (prop ==="Calificacion" || prop ==="Observacion"){
             setEstudiantes(estudiantes=>{
                 const lista=estudiantes.map((estudiante,index)=>{
-                    if (estudiante.idCurso_Estudiante === event.target.name){
+                    if (estudiante.idCurso_Estudiante == event.target.name){
                         if(prop ==="Calificacion"){
                             
                             estudiante.Calificacion = event.target.value
@@ -124,6 +124,7 @@ function ResgistroNotas(){
                 IdDocente:docente.idDocente,
                 IdPlanEvaluacion:asignaturacorte.Actividad
             }
+            console.log(body)
           return  axios.post(url,body,{headers:cabeceras})
         }))
        .then(axios.spread((...repuestas)=>{

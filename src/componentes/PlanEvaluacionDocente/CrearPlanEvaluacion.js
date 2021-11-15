@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import  {API_PLANDEEVALUACION,cabeceras,API_EVALUACIONTIPO,API_DOCENTE,API_CORTE} from "../../store/constante"
 import axios from "axios";
 function CrearPlanEvaluacion(props){
-    const [planevaluacion,setPlanevaluacion]=useState({cortes:[]})
+    const [planevaluacion,setPlanevaluacion]=useState({})
     const [evaluacionTipos,setEvaluacionTipos]=useState([])
     const [cortes,setCortes]=useState([])
     const [asignaturas,setAsignaturas]=useState([])
@@ -37,8 +37,8 @@ function CrearPlanEvaluacion(props){
              })
          })) 
     },[])
-   const traerloscorteacademicos=(()=>{
-        const url=process.env.REACT_APP_API_URL+API_CORTE
+   const traerloscorteacademicos=((Id)=>{
+        const url=process.env.REACT_APP_API_URL+API_CORTE+"/asignaturasdocentescortes/"+Id
         axios.get(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);
@@ -53,14 +53,14 @@ function CrearPlanEvaluacion(props){
         event.preventDefault()
         const url=process.env.REACT_APP_API_URL+API_PLANDEEVALUACION;
         const body={
-            idEvaluacionesTipo:planevaluacion["Evaluaciontipos"],
             Descripcion:planevaluacion["Descripcion"],
             FechaInicialProgramada:planevaluacion["FechaInicio"],
             FechaFinalProgramada:planevaluacion["FechaFinal"],
-            Idasignaturadocentecorte:planevaluacion.cortes.corte.Idasignaturadocentecorte,
-            Porcentaje:planevaluacion["porcentaje"]
+            Porcentaje:planevaluacion["porcentaje"],
+            idEvaluacionesTipo:planevaluacion["Evaluaciontipos"],
+            Idasignaturadocentecorte:planevaluacion.Cortes,
         }
-        console.log("hhhhh",JSON.stringify(body));
+        console.log(planevaluacion);
         axios.post(url,body,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);

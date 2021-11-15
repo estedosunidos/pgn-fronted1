@@ -50,17 +50,17 @@ function Login(){
 
         }else{
             localStorage.setItem("token",repuesta['token'])
+            localStorage.setItem("nombre_de_usuario",repuesta['Nombre']+" "+repuesta['Apellido']);
+            localStorage.setItem("documento",repuesta['Documento']);
+            localStorage.setItem("token","Bearer "+repuesta["token"]);
+            localStorage.setItem("perfil",JSON.stringify(repuesta["Perfil"]))
+            //localStorage.setItem("foto",JSON.stringify(repuesta["foto"]))
             ReactDOM.render(
                 <React.StrictMode>
                   <Routes/>
                 </React.StrictMode>,
                 document.getElementById('root')
               );
-            localStorage.setItem("nombre_de_usuario",repuesta['Nombre']+" "+repuesta['Apellido']);
-            localStorage.setItem("documento",repuesta['Documento']);
-            localStorage.setItem("token","Bearer "+repuesta["token"]);
-            localStorage.setItem("perfil",JSON.stringify(repuesta["Perfil"]))
-            //localStorage.setItem("foto",JSON.stringify(repuesta["foto"]))
         }
     }
     const mostrarPassword=()=>{

@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from "react";
 import  {API_ANUNCIO,cabeceras}  from "../../store/constante"
 import axios from "axios";
+import TextField from '@mui/material/TextField';
+
 function CrearAnuncio(props){
     const [anuncio,setAnucio]=useState({Mensaje:""})
     const handleChange=(prop)=>(events)=>{
@@ -13,6 +15,7 @@ function CrearAnuncio(props){
             Mensaje:anuncio.Mensaje,
             IdCurso:props.curso
         }
+        console.log(body)
         axios.post(url,body,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data)
@@ -29,10 +32,9 @@ function CrearAnuncio(props){
                 <label>Escribir un anuncio</label>
             </div>
             <form onSubmit={crearmensaje}>
-                <label>Mensaje</label>
-                <textarea name="anuncios" value={anuncio.Mensaje} onChange={handleChange("Mensaje")} rows="6" cols="50">
+                <TextField  id="outlined-multiline-static" label="Mensaje" multiline name="anuncios" value={anuncio.Mensaje} onChange={handleChange("Mensaje")} rows="6" cols="50">
 
-                </textarea>
+                </TextField>
                 <button  type="submit">Enviar</button>
                 <button onClick={()=>props.cancelar()}>Cancelar</button>
             </form>

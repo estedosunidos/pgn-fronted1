@@ -3,8 +3,11 @@ import  {API_ASIGNACIONDOCENTE,cabeceras,API_DOCENTE} from "../../store/constant
 import axios from "axios";
 import CrearAsignaturaDocente  from "./CrearAsignaturaDocente"
 import EditarAsisgnacionDocente  from "./EditarAsisgnacionDocente"
-import Table from "../Table"
+import TableCustom from "../TableCustom"
+
+
 function AsignacionDocente(props){
+    
     const [editar,setEditar]=useState(false)
     const [appState,setAppState]=useState(false)
     const [asignaciondocentes,setAsignaciondocentes]=useState([])
@@ -56,11 +59,13 @@ function AsignacionDocente(props){
     })
     return(
         <div>
-        <label>Asignacion de asignartura</label>
         <button onClick={mostracrearasignaciondocentes}>Nuevo</button>
-        <Table data={asignaciondocentes} borrar={borrarasignaciondocente} mostrar={mostraeditarasignaciondocente}></Table>
-        {crear && <CrearAsignaturaDocente docente={props.docente} cancelar={cancelar} crear={crearasignaciondocente}></CrearAsignaturaDocente>}
-        {editar && <EditarAsisgnacionDocente cancelar={cancelar}  docente={props.docente} asignaciondocente={asignaciondocente} editar={editaasignaciondocente}> </EditarAsisgnacionDocente>}
+        <TableCustom data={asignaciondocentes} borrar={borrarasignaciondocente} mostrar={mostraeditarasignaciondocente}></TableCustom>
+        {editar && <EditarAsisgnacionDocente showModal={editar} cancelar={cancelar}  docente={props.docente} asignaciondocente={asignaciondocente} editar={editaasignaciondocente}> </EditarAsisgnacionDocente>}
+        {crear && <CrearAsignaturaDocente showModal={crear} docente={props.docente} cancelar={cancelar} crear={crearasignaciondocente}></CrearAsignaturaDocente>}
+        
+
+
     </div>
     )
 }

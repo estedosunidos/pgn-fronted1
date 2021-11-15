@@ -63,7 +63,7 @@ function AnuncioProfesor(){
             <select name="grupos" defaultValue="" onChange={handleChange("Grupo")}>
                 <option value="" disabled>Seleccione</option>
                 {grupos.map((grupo,index)=>{
-                    return <option key={index} value={grupo.Id}>{grupo.Grupo}</option>
+                    return <option key={index} value={grupo.IdCurso}>{grupo.Grupo}</option>
                 })}
             </select>
         </div>

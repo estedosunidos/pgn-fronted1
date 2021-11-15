@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_DOCENTE,cabeceras,API_CURSO,API_ASISTENCIA} from "../store/constante"
 import axios from "axios";
+import Checkbox from '@mui/material/Checkbox'
 function RegistroAsistencia(){
     const [asignaturas,setAsignaturas]=useState([])
     const [grupos,setGrupos]=useState([])
@@ -34,7 +35,7 @@ function RegistroAsistencia(){
         })
         .catch(error=>{
             console.log(error)
-            alert("Los grupò no fueron cargados")
+            alert("Los grupo no fueron cargados")
         })
 
     })
@@ -44,11 +45,11 @@ function RegistroAsistencia(){
         }else if (prop ==="Asistio"){
             setEstudiantes(estudiantes=>{
                 const lista = estudiantes.map((estudiante,index)=>{
-                    if(estudiante.idCurso_Estudiante=== event.target.name){
+                    if(estudiante.idCurso_Estudiante==event.target.name){
                         if(event.target.checked){
-                            estudiante.Asistio="S"
+                            estudiante.asistio="S"
                         }else{
-                            estudiante.Asistio="N"
+                            estudiante.asistio="N"
                         }
                     }
                     return estudiante
@@ -78,7 +79,7 @@ function RegistroAsistencia(){
         const peticiones=[...estudiantes]
         axios.all(peticiones.map((peticion,index)=>{
             const body={
-                Asistio:peticion.Asistio,
+                Asistio:peticion.asistio,
                 Fecha:asistencia.Fecha,
                 IdDocente:docente.idDocente,
                 idCurso_Estudiantes:peticion.idCurso_Estudiante   
@@ -116,7 +117,7 @@ function RegistroAsistencia(){
             <select name="grupos" defaultValue="" onChange={handleChange("Grupo")}>
                 <option value="" disabled>Seleccione</option>
                 {grupos.map((grupo,index)=>{
-                    return <option key={index} value={grupo.Id}>{grupo.Grupo}</option>
+                    return <option key={index} value={grupo.IdCurso}>{grupo.Grupo}</option>
                 })}
             </select>
             <label>Fecha</label>
@@ -132,7 +133,7 @@ function RegistroAsistencia(){
                     <tbody>
                         {estudiantes.map((estudiante,index)=>{
                             return <tr key={index}><td>{estudiante.Documento}</td> <td>{estudiante.Apellido}</td> <td>{estudiante.Nombre}</td> 
-                            <td><input type="checkbox" value={estudiante.Asistio} name={estudiante.idCurso_Estudiante}onChange={handleChange("Asistio")} checked={estudiante.Asistio==='S'? 'checked': ''}></input></td></tr>
+                            <td><Checkbox inputProps={{ 'aria-label': 'Checkbox demo' }} type="checkbox" value={estudiante.asistio} name={estudiante.idCurso_Estudiante} onChange={handleChange("Asistio")} checked={estudiante.asistio=='S'? 'checked': ''}></Checkbox></td></tr>
                         })}
                     </tbody>
                 </table>

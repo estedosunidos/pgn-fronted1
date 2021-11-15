@@ -3,7 +3,7 @@ import  {API_ESTUDIOSREALIZADO,cabeceras,API_DOCENTE} from "../../store/constant
 import axios from "axios";
 import CrearEstudioRealizados  from "./CrearEstudioRealizados"
 import EditarEstudioRealizado  from "./Editarestudiorealizados"
-import Table from "../Table"
+import TableCustom from "../TableCustom"
 function EstudioRealizado(props){
     const [editar,setEditar]=useState(false)
     const [appState,setAppState]=useState(false)
@@ -57,9 +57,9 @@ function EstudioRealizado(props){
         <div>
         <label>Experencia academica</label>
         <button onClick={mostracrearestudiorealizado}>Nuevo</button>
-        <Table data={estudiosrealizados} borrar={borrarestudiorealizado} mostrar={mostraeditarestudiorealizado}></Table>
-        {crear && <CrearEstudioRealizados docente={props.docente} cancelar={cancelar} crear={crearestudiorealizado}></CrearEstudioRealizados>}
-        {editar && <EditarEstudioRealizado cancelar={cancelar} docente={props.docente} estudiorealizado={estudiorealizado} editar={editaestudiorealizado}> </EditarEstudioRealizado>}
+        <TableCustom data={estudiosrealizados} borrar={borrarestudiorealizado} mostrar={mostraeditarestudiorealizado}></TableCustom>
+        {crear && <CrearEstudioRealizados  showModal={crear} docente={props.docente} cancelar={cancelar} crear={crearestudiorealizado}></CrearEstudioRealizados>}
+        {editar && <EditarEstudioRealizado  showModal={editar} cancelar={cancelar} docente={props.docente} estudiorealizado={estudiorealizado} editar={editaestudiorealizado}> </EditarEstudioRealizado>}
     </div>
     )
 }

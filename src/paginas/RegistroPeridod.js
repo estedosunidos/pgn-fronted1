@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import  {API_PERIODO,cabeceras} from "../store/constante"
 import Editarperiodo from "../componentes/Periodo/EditarPeriodo";
 import CrearPeriodo from "../componentes/Periodo/CrearPeriodo";
@@ -57,7 +57,7 @@ function RegistroPeridod(){
         <div>
             <h1>Registro periodo</h1>
             <button onClick={mostracrearperiodo}>Nuevo</button>
-            <Table data={periodos} mostrar={mostraeditarperiodo} borrar={borrarperiodo}></Table>
+            <TableCustom data={periodos} mostrar={mostraeditarperiodo} borrar={borrarperiodo}></TableCustom>
             {editar && <Editarperiodo cancelar={cancelar}   periodo={periodo} editar={editarperiodo}> </Editarperiodo>}
             {crear && <CrearPeriodo cancelar={cancelar}   periodo={periodo} crear={crearperiodo}> </CrearPeriodo>}
         </div>

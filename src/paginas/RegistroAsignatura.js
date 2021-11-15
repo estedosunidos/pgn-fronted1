@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import  {API_ESTUDIANTE,cabeceras,API_CARRERA,API_CURSO} from "../store/constante"
+import  {API_ESTUDIANTE,cabeceras,API_CARRERA,API_CURSO,API_ASIGNATURA} from "../store/constante"
 import axios from "axios";
 import SeleccionarAsignatura from "../componentes/Asignatura/SeleccionarAsignatura";
 import AsignaturaMatriculada from "../componentes/Asignatura/AsignaturaMatriculada"
@@ -32,6 +32,7 @@ function RegistroAsignatura(){
     }
     const borrar=((cursoestudiantes)=>{
         const url=process.env.REACT_APP_API_URL+API_CURSO+"/cursoestudiante/"+cursoestudiantes.idCurso_Estudiante
+    
         axios.delete(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data)
@@ -61,13 +62,11 @@ function RegistroAsignatura(){
         })
     }
     const returnasignatura=(Id)=>{
-        const url = process.env.REACT_APP_API_URL+API_CARRERA+"/carreraestudiante/"+Id
+        const url = process.env.REACT_APP_API_URL+API_ASIGNATURA+"/carreraestudiante/"+Id
         axios.get(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data)
-            if(repuesta.data.length>0){
-                setAsignaturas(repuesta.data[0]["AsignaturaCarrera"])
-            }
+            setAsignaturas(repuesta.data)
         })
         .catch(error=>{
             console.log(error)

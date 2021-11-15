@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_CARRERA,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import EditarCarrera from "../componentes/carreras/EditarCarrera";
 import CrearCarrera from "../componentes/carreras/CrearCarrera";
 
@@ -56,10 +56,10 @@ function Carrrera(){
     return(
         <div>
             <button onClick={mostrarcrearcarrera}>Nuevo</button>
-           <Table data={carreras} borrar={borrarcarrera} mostrar={mostrareditarcarrera}></Table>
+           <TableCustom data={carreras} borrar={borrarcarrera} mostrar={mostrareditarcarrera}></TableCustom>
          
-           {editar && <EditarCarrera cancelar={cancelar} carrera={carrera} editar={editarcarrera}> </EditarCarrera>}
-           {crear && <CrearCarrera cancelar={cancelar} crear={crearcarrera}></CrearCarrera>}
+           {editar && <EditarCarrera showModal={editar} cancelar={cancelar} carrera={carrera} editar={editarcarrera}> </EditarCarrera>}
+           {crear && <CrearCarrera   showModal={crear}  cancelar={cancelar} crear={crearcarrera} showModal={crear}></CrearCarrera>}
 
            
         </div>

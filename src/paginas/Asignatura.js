@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_ASIGNATURA,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import EditarAsignaturas from "../componentes/asignaturas/EditarAsignaturas";
 import CrearAsignaturas from "../componentes/asignaturas/CrearAsignatura";
 function Asignatura(){
@@ -55,9 +55,9 @@ function Asignatura(){
     return(
         <div>
             <button onClick={mostracrearasignatura}>Nuevo</button>
-            <Table data={asignaturas} borrar={borrarasignatura} mostrar={mostrareditarasignatura}></Table>
-            {editar && <EditarAsignaturas cancelar={cancelar}   asignatura={asignatura} editar={editarasignaturas}> </EditarAsignaturas>}
-            {crear && <CrearAsignaturas cancelar={cancelar}   asignatura={asignatura} crear={crearasignaturas}> </CrearAsignaturas>}
+            <TableCustom data={asignaturas} borrar={borrarasignatura} mostrar={mostrareditarasignatura}></TableCustom>
+            {editar && <EditarAsignaturas showModal={editar} cancelar={cancelar}   asignatura={asignatura} editar={editarasignaturas}> </EditarAsignaturas>}
+            {crear && <CrearAsignaturas  showModal={crear} cancelar={cancelar}   asignatura={asignatura} crear={crearasignaturas}> </CrearAsignaturas>}
         </div>
     )
 }

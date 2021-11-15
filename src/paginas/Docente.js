@@ -56,7 +56,7 @@ function Docente(){
                     <input disabled value={docente.Nombre_de_Usuario}></input>
             </div>
             {mostraestudiorealizado && <EstudioRealizados  docente={docente}  ></EstudioRealizados>}
-            {mostraasignaciondeasignatura && <AsignacionDocente docente={docente}></AsignacionDocente>}
+            {mostraasignaciondeasignatura && <AsignacionDocente   docente={docente}></AsignacionDocente>}
         </div>
     )
 }

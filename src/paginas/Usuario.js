@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_USUARIO,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import EditarUsuario from "../componentes/usuario/EditaUsuario";
 import CrearUsuario from "../componentes/usuario/CrearUsuario";
 function Usuario(){
@@ -10,8 +10,8 @@ function Usuario(){
     const [editar,setEditar]=useState(false)
     const [usuario,setUsuario]=useState({})
     const [crear,setCrear]=useState(false)
-    const borrarusuario=((usuarios)=>{
-        const url=process.env.REACT_APP_API_URL+API_USUARIO+"/"+usuarios.Documento;
+    const borrarusuario=((usuario)=>{
+        const url=process.env.REACT_APP_API_URL+API_USUARIO+"/"+usuario.Documento;
         axios.delete(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);
@@ -54,10 +54,9 @@ function Usuario(){
     return(
         <div>
             <button onClick={mostrarcrearusuario}>Nuevo</button>
-           <Table data={usuarios} borrar={borrarusuario} mostrar={mostraeditarusuario}></Table>
-           {editar && <EditarUsuario cancelar={cancelar} usuario={usuario} editar={editarusuario} mostrar={mostraeditarusuario}> </EditarUsuario>}
-           
-           {crear && <CrearUsuario cancelar={cancelar} crear={crearusuario}></CrearUsuario>}
+           <TableCustom data={usuarios} borrar={borrarusuario} mostrar={mostraeditarusuario}></TableCustom>
+           {editar && <EditarUsuario  showModal={editar}  cancelar={cancelar} usuario={usuario} editar={editarusuario} mostrar={mostraeditarusuario}> </EditarUsuario>}
+           {crear && <CrearUsuario showModal={crear} cancelar={cancelar} crear={crearusuario}></CrearUsuario>}
         </div>
     )
 }

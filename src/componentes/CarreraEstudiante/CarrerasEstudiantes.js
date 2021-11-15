@@ -3,7 +3,7 @@ import  {API_CARRERAESTUDIANTE,cabeceras,API_ESTUDIANTE} from "../../store/const
 import axios from "axios";
 import CrearCarrerasEstudiantes  from "./CrearCarrerasEstudiantes"
 import EditarCarreraEstudiante  from "./EditarCarreraEstudiante"
-import Table from "../Table"
+import TableCustom from "../TableCustom"
 function CarreraEstudiantes(props){
     const [editar,setEditar]=useState(false)
     const [appState,setAppState]=useState(false)
@@ -58,8 +58,8 @@ function CarreraEstudiantes(props){
         <div>
         <label>Asignacion de carrera</label>
         <button onClick={mostracrearcarreraestudiante}>Nuevo</button>
-        <Table data={carreraestudiantes} borrar={borrarasignaciondocente} mostrar={mostraeditarcarreraestudiante}></Table>
-        {crear && <CrearCarrerasEstudiantes estudiante={props.estudiante}  cancelar={cancelar} crear={crearcarreraestudiante}></CrearCarrerasEstudiantes>}
+        <TableCustom data={carreraestudiantes} borrar={borrarasignaciondocente} mostrar={mostraeditarcarreraestudiante}></TableCustom>
+        {crear && <CrearCarrerasEstudiantes showModal={crear} estudiante={props.estudiante}  cancelar={cancelar} crear={crearcarreraestudiante}></CrearCarrerasEstudiantes>}
         {editar && <EditarCarreraEstudiante cancelar={cancelar} estudiante={props.estudiante} carreraestudiante={carreraestudiante} editar={editaasignaciondocente}> </EditarCarreraEstudiante>}
     </div>
     )

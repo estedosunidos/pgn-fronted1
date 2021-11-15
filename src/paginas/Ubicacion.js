@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_UBICACION,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import CrearUbucacion from "../componentes/Ubicacion/CrearUbicacion";
 import EditarUbicacion from "../componentes/Ubicacion/EditarUbicacion";
 function Ubicacion(){
@@ -54,15 +54,16 @@ function Ubicacion(){
     })
 
     const mostrarcrearubicacion=(()=>{
+        console.log(1)
         setCrear(true)
     })
 
     return(
         <div>
             <button onClick={mostrarcrearubicacion}>Nuevo</button>
-            <Table data={ubicacions} borrar={borrarubicacion} mostrar={mostraeditarubicacion}></Table>
-            {editar && <EditarUbicacion cancelar={cancelar} ubicacion={ubicacion} editar={editarubicacion}> </EditarUbicacion>}
-            {crear && <CrearUbucacion cancelar={cancelar} crear={CrearUbicacion}></CrearUbucacion>}
+            <TableCustom data={ubicacions} borrar={borrarubicacion} mostrar={mostraeditarubicacion}></TableCustom>
+            {editar && <EditarUbicacion showModal={editar} cancelar={cancelar} ubicacion={ubicacion} editar={editarubicacion}> </EditarUbicacion>}
+            {crear && <CrearUbucacion showModal={crear} cancelar={cancelar} crear={CrearUbicacion}></CrearUbucacion>}
         </div>
     )
 }

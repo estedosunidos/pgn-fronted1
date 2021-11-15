@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {cabeceras,API_ANUNCIO} from "../../store/constante"
 import axios from "axios";
-import Table from "../Table"
+import TableCustom from "../TableCustom"
 import EditarAnuncio from "./EditarAnuncio";
 import CrearAnuncio from "./CrearAnuncio"
 function Anuncios(props){
@@ -60,7 +60,7 @@ function Anuncios(props){
     return(
         <div>
             <button onClick={mostracrearanuncio}>Nuevo</button>
-            <Table data={anuncios} borrar={borraranuncio} mostrar={mostrareditaranuncio}></Table>
+            <TableCustom data={anuncios} borrar={borraranuncio} mostrar={mostrareditaranuncio}></TableCustom>
             {editar && <EditarAnuncio cancelar={cancelar}  anuncio={anuncio} editar={editaranuncio}> </EditarAnuncio>}
             {crear && <CrearAnuncio cancelar={cancelar}   curso={props.grupo} crear={crearanuncio}> </CrearAnuncio>}
         </div>

@@ -3,6 +3,7 @@ import {API_DOCENTE,cabeceras,API_CORTE} from "../store/constante"
 import axios from "axios";
 function CortesAsignatura(){
     const [asignaturas,setAsignaturas]=useState([])
+    const [asignatura,setAsignatura]=useState()
     const [porcentajes,setPorcentajes]=useState([])
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
@@ -20,10 +21,12 @@ function CortesAsignatura(){
          })
     },[])
     const handleChange=(prop)=>(event)=>{
-        
+        console.log(prop)
         if (prop === "Asignatura"){
+            setAsignatura(event.target.value)
             consultarcorte(event.target.value)
         }else if (prop ==="Porcentaje"){
+            console.log(2)
             setPorcentajes(porcentajes=>{
                 const lista=porcentajes.map((porcentaje,index)=>{
                     console.log(porcentaje.Id, event.target.name, typeof porcentaje.Id, typeof event.target.name)
@@ -52,9 +55,10 @@ function CortesAsignatura(){
         const url=process.env.REACT_APP_API_URL+API_CORTE+"/asignaturaporcorte"
         const peticiones=[...porcentajes]
         axios.all(peticiones.map((peticion,index)=>{
+            console.log(peticion)
             const body={
-                IdAsignaturaDocente:peticion.IdAsignaturaDocente,
-                IdCorte:peticion.IdCorte,
+                IdAsignaturaDocente:asignatura,
+                IdCorte:peticion.Id,
                 Pocentaje:peticion.Porcentaje
             }
           return  axios.post(url,body,{headers:cabeceras})

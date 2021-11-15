@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_EVALUACIONTIPO,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import Editarevaluaciontipo from "../componentes/Evaluaciontipo/Editarevaluaciontipo"
 import Crearevaluaciontipo from "../componentes/Evaluaciontipo/Crearevaluaciontipo"
 function Evaluaciontipo(){
@@ -19,7 +19,7 @@ function Evaluaciontipo(){
         })
     },[appState]);
     const borrarevaluaciontipo=((evaluaciontipo)=>{
-        const url=process.env.REACT_APP_API_URL+API_EVALUACIONTIPO+"/"+evaluaciontipo.idEvaluacionesTipo;
+        const url=process.env.REACT_APP_API_URL+API_EVALUACIONTIPO+"/"+evaluaciontipo.Id;
         axios.delete(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);
@@ -54,10 +54,10 @@ function Evaluaciontipo(){
     return(
         <div>
             <button onClick={mostrarcrearevaluaciontipo}>Nuevo</button>
-           <Table data={evaluaciontipos} borrar={borrarevaluaciontipo} mostrar={mostrareditarevaluaciontipo}></Table>
-           {editar && <Editarevaluaciontipo cancelar={cancelar} evaluaciontipo={evaluaciontipo} editar={editarevaluaciontipo}> </Editarevaluaciontipo>}
+           <TableCustom data={evaluaciontipos} borrar={borrarevaluaciontipo} mostrar={mostrareditarevaluaciontipo}></TableCustom>
+           {editar && <Editarevaluaciontipo showModal={editar}  cancelar={cancelar} evaluaciontipo={evaluaciontipo} editar={editarevaluaciontipo}> </Editarevaluaciontipo>}
            
-           {crear && <Crearevaluaciontipo cancelar={cancelar} crear={crearevaluaciontipo}></Crearevaluaciontipo>}
+           {crear && <Crearevaluaciontipo  showModal={crear} cancelar={cancelar} crear={crearevaluaciontipo}></Crearevaluaciontipo>}
         </div>
     )
 }

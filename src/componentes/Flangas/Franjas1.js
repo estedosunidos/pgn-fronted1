@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import  {API_FRANJAS,cabeceras} from "../../store/constante"
 import axios from "axios";
-import Table from "../Table"
+import TableCustom from "../TableCustom"
 import CrearFranjas from "./CrearFranjas"
 import EditarFlanjar from "./EditarFlanjar"
 function Franjas1(props){
@@ -61,9 +61,9 @@ function Franjas1(props){
             <div>
                 <button onClick={mostracrearfranjas}>Nuevo</button>
             </div>
-            <Table data={franjas1} borrar={borrarfranja} mostrar={mostrareditarfranja}></Table>
+            <TableCustom data={franjas1} borrar={borrarfranja} mostrar={mostrareditarfranja}></TableCustom>
             {crear && <CrearFranjas franja1={props.franja} curso={props.grupo.Grupo} cancelar={cancelar} crear={crearfranja}></CrearFranjas>}
-            {editar && <EditarFlanjar cancelar={cancelar} franja1={props.franja1} curso={props.grupo.Grupo} editar={editafranja}> </EditarFlanjar>}
+            {editar && <EditarFlanjar cancelar={cancelar} franja1={franja1} curso={props.grupo.Grupo} editar={editafranja}> </EditarFlanjar>}
         </div>
     )   
 }

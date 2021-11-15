@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import  {API_CURSO,cabeceras} from "../store/constante"
 import axios from "axios";
-import Table from "../componentes/Table"
+import TableCustom from "../componentes/TableCustom"
 import Editarcurso from "../componentes/cursos/EditarCurso"
 import CrearCurso from "../componentes/cursos/CrearCurso";
 function Curso(){
@@ -56,7 +56,7 @@ function Curso(){
     return(
         <div>
             <button onClick={mostracrearacurso}>Nuevo</button>
-            <Table data={cursos} borrar={borrarcurso} mostrar={mostrareditarcurso}></Table>
+            <TableCustom data={cursos} borrar={borrarcurso} mostrar={mostrareditarcurso}></TableCustom>
             {editar && <Editarcurso cancelar={cancelar}   curso={curso} editar={editarcurso}> </Editarcurso>}
             {crear && <CrearCurso cancelar={cancelar}   curso={curso} crear={crearcurso}> </CrearCurso>}
         </div>

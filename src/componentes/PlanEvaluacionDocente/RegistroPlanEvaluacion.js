@@ -1,17 +1,18 @@
 import React,{useState,useEffect} from "react"
 import axios from "axios";
-import Table from "../componentes/Table"
-import  {API_PLANDEEVALUACION,cabeceras} from "../store/constante"
-import EditarPlanEvaluacionDocente from "../componentes/PlanEvaluacionDocente/EditarPlanEvaluacionDocente";
-import CrearPlanEvaluacion from "../componentes/PlanEvaluacionDocente/CrearPlanEvaluacion";
-function RegistroPlanEvaluacion(){
+import { API_PLANDEEVALUACION, cabeceras } from "../../store/constante";
+import CrearPlanEvaluacion from './CrearPlanEvaluacion';
+import EditarPlanEvaluacionDocente from './EditarPlanEvaluacionDocente';
+import TableCustom from '../TableCustom'
+function RegistroPlanEvaluacion(props){
     const [appState,setAppState]=useState(false)
     const [crear,setCrear]=useState(false)
     const [editar,setEditar]=useState(false)
     const [planEvaluacion,setPlanEvaluacion]=useState({})
     const [planEvaluaciones,setPlanEvaluaciones]=useState([])
     const borrarplanevaluacion=((planEvaluaciones)=>{
-        const url=process.env.REACT_APP_API_URL+API_PLANDEEVALUACION+"/"+planEvaluaciones.Id;
+        console.log(planEvaluaciones)
+        const url=process.env.REACT_APP_API_URL+API_PLANDEEVALUACION+"/"+planEvaluaciones.IdPlanEvaluacion;
         axios.delete(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);
@@ -35,7 +36,7 @@ function RegistroPlanEvaluacion(){
         setPlanEvaluacion(plaevaluacion)
     })
     useEffect(()=>{
-        const url=process.env.REACT_APP_API_URL+API_PLANDEEVALUACION;
+        const url=process.env.REACT_APP_API_URL+API_PLANDEEVALUACION+"/asignaturadocente/"+props.asignatura;
         axios.get(url,{headers:cabeceras})
         .then(repuesta=>{
             console.log(repuesta.data);
@@ -56,8 +57,9 @@ function RegistroPlanEvaluacion(){
     return(
         <div>
             <h1>Registro plan evaluacion</h1>
+            <label></label>
             <button onClick={mostracrearplanevaluacion}>Nuevo</button>
-            <Table data={planEvaluaciones} mostrar={mostrareditarasignatura} borrar={borrarplanevaluacion}></Table>
+            <TableCustom data={planEvaluaciones} mostrar={mostrareditarasignatura} borrar={borrarplanevaluacion}></TableCustom>
             {editar && <EditarPlanEvaluacionDocente cancelar={cancelar}   planEvaluacion={planEvaluacion} editar={editarplanevaluacion} > </EditarPlanEvaluacionDocente>}
             {crear && <CrearPlanEvaluacion cancelar={cancelar}   planEvaluacion={planEvaluacion} crear={crearplanevaluacion}> </CrearPlanEvaluacion>}
         </div>
