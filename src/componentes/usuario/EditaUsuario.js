@@ -109,12 +109,6 @@ function EditarUsuario(props){
                             <TextField id="standard-basic1" name="Documento" label={'Documento'} margin="normal" value={usuario.Documento} onChange={handleChange("Documento")} />
                         </FormControl>
                         <FormControl fullWidth>
-                            <TextField id="standard-basic2" name="Nombre" label={'Nombre'} margin="normal" value={usuario.Nombre} onChange={handleChange("Nombre")} />
-                        </FormControl>
-                        <FormControl fullWidth>
-                            <TextField id="standard-basic3" name="Apellido" label={'Apellido'} margin="normal" value={usuario.Apellido} onChange={handleChange("Apellido")} />
-                        </FormControl>
-                        <FormControl fullWidth>
                             <TextField id="standard-basic4" name="Telefono" label={'Telefono'} margin="normal" value={usuario.Telefono} onChange={handleChange("Telefono")} />
                         </FormControl>
                         <FormControl fullWidth>
@@ -134,25 +128,6 @@ function EditarUsuario(props){
                         </LocalizationProvider>
                         <FormControl fullWidth>
                             <TextField id="standard-basic6" name="Email" label={'Email'} margin="normal" value={usuario.Email} onChange={handleChange("Email")} />
-                        </FormControl>
-                        <FormControl fullWidth>
-
-                            <TextField name="perfiles"
-                                select
-                                label={'Perfil'} margin="normal"
-                                value={perfil.Perfil}
-                                defaultValue=" " onChange={handleChange("Perfil")}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                            >
-                                <MenuItem value=" " disabled selected>
-                                    <em>Seleccione</em>
-                                </MenuItem>
-                                {perfiles.map((perfil, index) => {
-                                    return <MenuItem key={index} value={perfil.idperfil}>{perfil.descricion}</MenuItem>
-                                })}
-                            </TextField>
-
                         </FormControl>
                     </Box>
 

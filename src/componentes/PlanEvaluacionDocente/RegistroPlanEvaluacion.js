@@ -61,7 +61,7 @@ function RegistroPlanEvaluacion(props){
             <button onClick={mostracrearplanevaluacion}>Nuevo</button>
             <TableCustom data={planEvaluaciones} mostrar={mostrareditarasignatura} borrar={borrarplanevaluacion}></TableCustom>
             {editar && <EditarPlanEvaluacionDocente cancelar={cancelar}   planEvaluacion={planEvaluacion} editar={editarplanevaluacion} > </EditarPlanEvaluacionDocente>}
-            {crear && <CrearPlanEvaluacion cancelar={cancelar}   planEvaluacion={planEvaluacion} crear={crearplanevaluacion}> </CrearPlanEvaluacion>}
+            {crear && <CrearPlanEvaluacion showModal={crear} cancelar={cancelar}   planEvaluacion={planEvaluacion} crear={crearplanevaluacion}> </CrearPlanEvaluacion>}
         </div>
     )
 }

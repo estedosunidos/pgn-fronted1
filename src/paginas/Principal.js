@@ -50,7 +50,6 @@ function Principal(){
         <label>Bienvenido: {nombre_completo}</label>
         {/*<img src={"data:image/png;base64," + new Buffer.from(foto).toString("base64")}></img>*/}
         <button onClick={salir}>Salir</button>
-        {perfil.idperfil === 3 && <button onClick={anuncioestudiante1}>Consulta</button>}
         <button onClick={actualizarcontrasena}>Actualizar Contraseña</button>
         {mostracambiodecontrasena && <ModificarContrasena muestramodal={muestramodal1} documento={documento}></ModificarContrasena>}
         </div>       

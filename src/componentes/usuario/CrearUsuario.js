@@ -138,28 +138,6 @@ function CrearUsuario(props) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
-                        <FormControl fullWidth>
-                            <TextField id="standard-basic5" name="Email" label={'Email'} margin="normal" value={usuario.Email} onChange={handleChange("Email")} />
-                        </FormControl>
-                        <FormControl fullWidth>
-
-                            <TextField name="perfiles"
-                                select
-                                label={'Perfil'} margin="normal"
-                                value={perfil.Perfil}
-                                defaultValue=" " onChange={handleChange("Perfil")}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                            >
-                                <MenuItem value=" " disabled selected>
-                                    <em>Seleccione</em>
-                                </MenuItem>
-                                {perfiles.map((perfil, index) => {
-                                    return <MenuItem key={index} value={perfil.idperfil}>{perfil.descricion}</MenuItem>
-                                })}
-                            </TextField>
-
-                        </FormControl>
                     </Box>
 
                 </DialogContent>

@@ -23,10 +23,7 @@ import Consultarnotas from "../paginas/Consultarnotas"
 import AnuncioEstudiante from "../componentes/AnuncioEstudiante/AnuncioEstudiante"
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import * as IoIcons from 'react-icons/io';
 import * as GiIcons from 'react-icons/gi';
-import * as GrIcons from 'react-icons/gr';
-import { IconName } from "react-icons/gr";
 const menu =[{
     titulo: "Principal",
     icono: <AiIcons.AiFillHome />,
@@ -138,6 +135,7 @@ const menu =[{
 },{
     titulo:"RegistroNotas",
     ruta:"/RegistroNotas",
+    style:"nav-text",
     componente:RegistroNotas,
     IsDocente:true
 },{
@@ -201,7 +199,7 @@ const menu =[{
     IsEstudiante:true
 },{
     titulo:"",
-    icono:<FaIcons.FaBell    />,
+    icono:<FaIcons.FaBell/>,
     ruta:"/AnuncioEstudiante",
     componente:AnuncioEstudiante,
     style:"nav-text-alert",
