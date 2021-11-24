@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
-import { API_ANUNCIO, cabeceras } from "../../store/constante"
+import { API_ANUNCIO, cabeceras,API_ESTUDIANTE } from "../../store/constante"
 import React, { useState } from "react";
 import InformacionAnuncio from "./InformacionAnuncio"
 import TableBody from '@mui/material/TableBody';
@@ -20,6 +20,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
+import { useHistory } from "react-router-dom";
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -70,20 +72,41 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function AnuncioEstudiante() {
     const [anunciosestudiante, setAnuciosestudiante] = useState({})
     const [anunciosestudiantes, setAnuciosestudiantes] = useState([])
-    const [appState, setAppState] = useState(false)
+    const [estudiante, setEstudiante] = useState([])
     const [mostrainformacion, setMostrainformacion] = useState(false)
-    useEffect(() => {
-        const url = process.env.REACT_APP_API_URL + API_ANUNCIO + "/anuncioporestudiante/" + 1
+    const [mostradetalle, setMostradetalle] = useState(false)
+    const history = useHistory();
+    const informacionAnuncio=((Id)=>{
+        const url = process.env.REACT_APP_API_URL + API_ANUNCIO + "/anuncioporestudiante/" + Id
         axios.get(url, { headers: cabeceras })
             .then(repuesta => {
+                setMostrainformacion(true)
                 console.log(repuesta.data)
                 setAnuciosestudiantes(repuesta.data)
             })
             .catch(error => {
                 alert("Los anuncios no pudieron ser cargado")
                 console.log(error)
-            })
-    }, [appState])
+            })  
+    })
+    useEffect(() => {
+        const documento =localStorage.getItem("documento")
+        const url=process.env.REACT_APP_API_URL+API_ESTUDIANTE+"/documento/"+ documento
+        axios.get(url,{headers:cabeceras})
+        .then(repuesta=>{
+            console.log(repuesta.data)
+            let estudiante1=repuesta.data
+            console.log(estudiante1)
+            if(estudiante1.length>0){
+                setEstudiante(estudiante1[0])
+                informacionAnuncio(estudiante1[0]["idEstudiantes"])
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+            alert("El estudiante no fue cargado")
+        })
+    }, [])
     const actualizarleido = ((mensaje) => {
         const url = process.env.REACT_APP_API_URL + API_ANUNCIO + "/anuncioporestudiante"
         const body = {
@@ -101,19 +124,23 @@ function AnuncioEstudiante() {
             })
     })
     const muestramodal = ((mensaje) => {
-        setMostrainformacion(true)
+        setMostradetalle(true)
         setAnuciosestudiante(mensaje)
         actualizarleido(mensaje)
     })
     const cancelar = (() => {
         setMostrainformacion(false)
+        history.push("/");
+    })
+    const cerrar=(()=>{
+        setMostradetalle(false)
     })
     return (
         <div>
             <BootstrapDialog
                 onClose={cancelar}
                 aria-labelledby="customized-dialog-title1"
-                open={true}>
+                open={mostrainformacion}>
                 <BootstrapDialogTitle id="customized-dialog-title1" onClose={cancelar}>
                     <label>Mensajes</label>
                 </BootstrapDialogTitle>
@@ -124,10 +151,10 @@ function AnuncioEstudiante() {
                                 <TableHead><TableRow><StyledTableCell>Fecha</StyledTableCell><StyledTableCell>Mensaje</StyledTableCell><StyledTableCell>Asignatura</StyledTableCell></TableRow>
                                 </TableHead>
                                 <TableBody>{anunciosestudiantes.map((anuncioestudiante1, index) => {
-                                    return <TableRow key={index} onClick={() => { muestramodal(anuncioestudiante1) }}><StyledTableCell>{anuncioestudiante1.Fecha}</StyledTableCell><StyledTableCell>{anuncioestudiante1.Mensaje}</StyledTableCell><StyledTableCell>{anuncioestudiante1["Nombre_Asignatura"] + "-" + anuncioestudiante1.Grupo}</StyledTableCell></TableRow>
+                                    return <TableRow key={index} onClick={() => { muestramodal(anuncioestudiante1) }}  style={anuncioestudiante1.leido=="S"?{backgroundColor:'#fff'}:{backgroundColor:'#e0e0e0'}}><StyledTableCell>{anuncioestudiante1.Fecha}</StyledTableCell><StyledTableCell>{anuncioestudiante1.Mensaje}</StyledTableCell><StyledTableCell>{anuncioestudiante1["Nombre_Asignatura"] + "-" + anuncioestudiante1.Grupo}</StyledTableCell></TableRow>
                                 })}</TableBody>
                             </Table>
-                        </TableContainer>
+                        </TableContainer> 
                     </Box>
                 </DialogContent>
                 <DialogActions>
@@ -136,7 +163,7 @@ function AnuncioEstudiante() {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-            {mostrainformacion && <InformacionAnuncio informacion={anunciosestudiante} cancelar={cancelar}></InformacionAnuncio>}
+            {mostradetalle && <InformacionAnuncio showModal={mostradetalle} informacion={anunciosestudiante} cancelar={cerrar}></InformacionAnuncio>}
         </div>
     )
 }
