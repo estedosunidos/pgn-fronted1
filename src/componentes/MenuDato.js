@@ -36,86 +36,86 @@ const menu =[{
     componente:Principal
 },
 {
-    titulo:"Carrera",
+    titulo:"Carreras",
     icono:<FaIcons.FaToolbox/>,
-    ruta: "/Carrera",
+    ruta: "/Carreras",
     style:"nav-text",
     componente:Carrera,
     IsAdministrativo:true
 },
 {
-    titulo:"Asignatura",
+    titulo:"Asignaturas",
     icono:<FaIcons.FaBookReader/>,
-    ruta:"/Asignatura",
+    ruta:"/Asignaturas",
     style:"nav-text",
     componente:Asignatura,
     IsAdministrativo:true
 },
 {
-    titulo:"Usuario",
+    titulo:"Usuarios",
     icono:<FaIcons.FaUserFriends
     />,
-    ruta:"/Usuario",
+    ruta:"/Usuarios",
     componente:Usuario,
     style:"nav-text",
     IsAdministrativo:true
 },
 {
-    titulo:"Docente",
+    titulo:"Docentes",
     icono:<GiIcons.GiTeacher/>,
-    ruta:"/Docente",
+    ruta:"/Docentes",
     componente:Docente,
     style:"nav-text",
     IsAdministrativo:true
 },
 {
-    titulo:"Estudiante",
+    titulo:"Estudiantes",
     icono:<FaIcons.FaUserGraduate/>,
-    ruta:"/Estudiante",
+    ruta:"/Estudiantes",
     componente:Estudiante,
     style:"nav-text",
     IsAdministrativo:true
 },
 {
-    titulo:"Ubicacion",
+    titulo:"Ubicaciones",
     icono:<FaIcons.FaBuilding
     />,
-    ruta:"/Ubicacion",
+    ruta:"/Ubicaciones",
     componente:Ubicacion,
     style:"nav-text",
     IsAdministrativo:true
 },{
-    titulo:"EvaluacionTipo",
+    titulo:"EvaluacionTipos",
     icono:<FaIcons.FaFileSignature
     />,
-    ruta:"/Evaluaciontipo",
+    ruta:"/Evaluaciontipos",
     componente:Evaluaciontipo,
     style:"nav-text",
     IsAdministrativo:true
 },{
-    titulo:"Curso",
+    titulo:"Cursos",
     icono:<FaIcons.FaChalkboardTeacher/>,
-    ruta:"/Curso",
+    ruta:"/Cursos",
     style:"nav-text",
     componente:Curso,
     IsAdministrativo:true
 },{
-    titulo:"Administrador",
+    titulo:"Administradores",
     icono:<FaIcons.FaUsersCog/>,
-    ruta:"/Administrador",
+    ruta:"/Administradores",
     style:"nav-text",
     componente:Administrador,
     IsAdministrativo:true
 },{
-    titulo:"AsinancionCarrera",
-    ruta:"/AsinancionCarrera",
+    titulo:"AsinancionCarreras",
+    ruta:"/AsinancionCarreras",
     style:"nav-text",
     componente:AsinancionCarrera,
     IsAdministrativo:true
 },{
     titulo:"Franjas",
     icono:<AiIcons.AiOutlineSchedule/>,
-    ruta:"/Franja",
+    ruta:"/Franjas",
     style:"nav-text",
     componente:Franjas,
     IsAdministrativo:true
@@ -135,8 +135,8 @@ const menu =[{
     componente:RegistroNotas,
     IsDocente:true
 },{
-    titulo:"Registro Plan de evaluacion",
-    ruta:"/RegistroPlandeEvaluacion",
+    titulo:"Registro Plan de evaluaciones",
+    ruta:"/RegistroPlandeEvaluaciones",
     style:"nav-text",
     componente:RegistroPlanEvaluacion,
     IsDocente:true
@@ -158,10 +158,10 @@ const menu =[{
 },{
     
 
-    titulo:"RegistroPeriodo",
+    titulo:"RegistroPeriodos",
     icono:<AiIcons.AiFillCalendar/>,
     style:"nav-text",
-    ruta:"/RegistroPeriodo",
+    ruta:"/RegistroPeriodos",
     componente:RegisstroPeriodo,
     IsAdministrativo:true
 },{
@@ -171,16 +171,16 @@ const menu =[{
     componente:CortesAsignatura,
     IsDocente:true
 },{
-    titulo:"RegistroAsignatura",
+    titulo:"RegistroAsignaturas",
     icono:<FaIcons.FaCalendarCheck/>,
-    ruta:"/RegistroAsignatura",
+    ruta:"/RegistroAsignaturas",
     style:"nav-text",
     componente:RegistroAsignatura,
     IsEstudiante:true
 },{
-    titulo:"ConsultarHorario",
+    titulo:"ConsultarHorarios",
      icono:<AiIcons.AiOutlineSchedule/>,
-    ruta:"/ConsultaHorario",
+    ruta:"/ConsultaHorarios",
     style:"nav-text",
     componente:ConsultarHorario,
     IsEstudiante:true

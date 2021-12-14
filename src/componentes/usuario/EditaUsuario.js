@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import moment from "moment"
 import  {cabeceras,API_USUARIO,API_PERFIL} from "../../store/constante"
 import axios from "axios";
 import TextField from '@mui/material/TextField';
@@ -9,7 +8,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';

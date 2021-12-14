@@ -35,6 +35,7 @@ function Navegacion() {
                     {menu.map((ruta, index) => (
                         <li key={index} className={ruta.style} ><Link to={ruta.ruta}>{ruta.icono} <span>{ruta.titulo}</span></Link></li>
                     ))}
+                    
                 </ul>
             </nav>
         </IconContext.Provider>

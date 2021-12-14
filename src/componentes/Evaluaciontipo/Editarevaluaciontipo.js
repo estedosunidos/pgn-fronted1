@@ -53,6 +53,8 @@ BootstrapDialogTitle.propTypes = {
 };
 function Editarevaluaciontipo(props){
     const [evaluaciontipo,setEvaluaciontipo]=useState(props.evaluaciontipo)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     const editarplanevaluacion=((event)=>{
         event.preventDefault()
         const url=process.env.REACT_APP_API_URL+API_EVALUACIONTIPO+"/"+evaluaciontipo.Id;
@@ -65,9 +67,10 @@ function Editarevaluaciontipo(props){
             console.log(repuesta.data);
             props.editar();
         }) 
-        .catchsetTextError(error=>{
-            alert("El evaluacion tipo no fue editado")
+        .catch(error=>{
             console.log(error)
+            setTextError("Se presento un error a intentar a actualizar el tipo de evaluacion")
+            setShowError(true)
         })
     })
     const handleChange=(prop)=>(event)=>{
