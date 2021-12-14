@@ -4,6 +4,12 @@ import { API_PLANDEEVALUACION, cabeceras } from "../../store/constante";
 import CrearPlanEvaluacion from './CrearPlanEvaluacion';
 import EditarPlanEvaluacionDocente from './EditarPlanEvaluacionDocente';
 import TableCustom from '../TableCustom'
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function RegistroPlanEvaluacion(props){
     const [appState,setAppState]=useState(false)
     const [crear,setCrear]=useState(false)

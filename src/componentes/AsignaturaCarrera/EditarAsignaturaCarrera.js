@@ -54,7 +54,7 @@ BootstrapDialogTitle.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-function CrearAsignaturaDocente(props){
+function EditarAsignaturaCarrera(props){
     const [asignacioncarrera,setAsignacioncarrera]=useState({Id:""})
     const [asignaturas,setAsignaturas]=useState([])
     useEffect(()=>{
@@ -69,7 +69,7 @@ function CrearAsignaturaDocente(props){
         event.preventDefault()
         const url=process.env.REACT_APP_API_URL+API_ASIGNATURACARRERA+"/"+props.asignaturacarrera.Id;
         const body={
-            IdAsignatura:asignacioncarrera.Asignatura,
+            IdAsignatura:asignacioncarrera.Id,
             IdCarrera:props.carrera.Id
 
         }
@@ -104,8 +104,8 @@ function CrearAsignaturaDocente(props){
                             <TextField name="asignaturas"
                                 select
                                 label={'Asignatura'} margin="normal"
-                                value={asignacioncarrera.Asignatura}
-                                defaultValue=" " onChange={handleChange("Asignatura")}
+                                value={asignacioncarrera.Id}
+                                defaultValue=" " onChange={handleChange("Asignaturas")}
                                 displayEmpty
                                 inputProps={{ 'aria-label': 'Without label' }}
                             >
@@ -113,7 +113,7 @@ function CrearAsignaturaDocente(props){
                                     <em>Seleccione</em>
                                 </MenuItem>
                                 {asignaturas.map((asignatura, index) => {
-                                    return <MenuItem key={index} value={asignatura.Id}>{asignatura.Asignatura}</MenuItem>
+                                    return <MenuItem key={index} value={asignatura.Id} selected={asignatura.Id == asignacioncarrera.Id ? true : false}>{asignatura.Asignaturas}</MenuItem>
                                 })}
                             </TextField>
 
@@ -133,4 +133,4 @@ function CrearAsignaturaDocente(props){
         </div>
     )
 }
-export default CrearAsignaturaDocente
+export default EditarAsignaturaCarrera

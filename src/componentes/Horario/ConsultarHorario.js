@@ -1,29 +1,48 @@
-const TableHeader=(props)=>{
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.primary.dark,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+const TableHeaderCustom=(props)=>{
     let  columnas
       columnas=  Object.keys(props.columnas[0]).map((columna,index)=>{
-            return <th key={index}>{columna}</th>
+            return <StyledTableCell key={index}>{columna}</StyledTableCell>
         })
-    return <thead><tr>{columnas}</tr></thead>
+    return <TableHead><TableRow>{columnas}</TableRow></TableHead>
 }
 
-const TableBody=(props)=>{ 
+const TableBodyCustom=(props)=>{ 
     let filas
   filas=props.filas.map((fila,index)=>{
-      return <tr key={index}>{Object.values(fila).map((columna,indexcolumna)=>{
-        return <td key={indexcolumna}>{columna}</td>
-      })}</tr>
+      return <TableRow key={index}>{Object.values(fila).map((columna,indexcolumna)=>{
+        return <StyledTableCell key={indexcolumna}>{columna}</StyledTableCell>
+      })}</TableRow>
   })
-  return <tbody>{filas}</tbody>
+  return <TableBody>{filas}</TableBody>
 }
 function ConsultarHorario(props){
     const {data}=props
    if(data.length>0){
     return(
-        <table>
-            <TableHeader columnas={data}/>
-            <TableBody filas={data}/>
+        <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 500 }} aria-label="customized table">
+            <TableHeaderCustom columnas={data}/>
+            <TableBodyCustom filas={data}/>
 
-        </table>
+        </Table>
+        </TableContainer>
     )
    }else{
        return(

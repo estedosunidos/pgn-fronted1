@@ -68,7 +68,6 @@ function CrearUbicacion(props){
             props.crear();
         }) 
         .catch(error=>{
-            alert("La ubicacion no fue creado")
             console.log(error)
         })
     })

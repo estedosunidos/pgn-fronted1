@@ -4,6 +4,8 @@ import axios from "axios";
 import TableCustom from "../TableCustom"
 import CrearFranjas from "./CrearFranjas"
 import EditarFlanjar from "./EditarFlanjar"
+import * as GrIcons from 'react-icons/gr';
+import Button from '@mui/material/Button';
 function Franjas1(props){
     const [franjas1,setFranjas1]=useState([])
     const [franja1,setFranja1]=useState({})
@@ -58,11 +60,9 @@ function Franjas1(props){
     return(
         <div>
             <label>Franjas</label>
-            <div>
-                <button onClick={mostracrearfranjas}>Nuevo</button>
-            </div>
+            <div><Button onClick={mostracrearfranjas} startIcon={<GrIcons.GrAddCircle></GrIcons.GrAddCircle>} variant="contained">Nuevo</Button></div>
             <TableCustom data={franjas1} borrar={borrarfranja} mostrar={mostrareditarfranja}></TableCustom>
-            {crear && <CrearFranjas franja1={props.franja} curso={props.grupo.Grupo} cancelar={cancelar} crear={crearfranja}></CrearFranjas>}
+            {crear && <CrearFranjas  showModal={crear} franja1={props.franja} curso={props.grupo.Grupo} cancelar={cancelar} crear={crearfranja}></CrearFranjas>}
             {editar && <EditarFlanjar cancelar={cancelar} franja1={franja1} curso={props.grupo.Grupo} editar={editafranja}> </EditarFlanjar>}
         </div>
     )   

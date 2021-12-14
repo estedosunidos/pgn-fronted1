@@ -85,8 +85,6 @@ const menu =[{
     style:"nav-text",
     IsAdministrativo:true
 },{
-    
-
     titulo:"EvaluacionTipo",
     icono:<FaIcons.FaFileSignature
     />,
@@ -95,8 +93,6 @@ const menu =[{
     style:"nav-text",
     IsAdministrativo:true
 },{
-    
-
     titulo:"Curso",
     icono:<FaIcons.FaChalkboardTeacher/>,
     ruta:"/Curso",
@@ -198,7 +194,7 @@ const menu =[{
     componente:Consultarnotas,
     IsEstudiante:true
 },{
-    titulo:"",
+    titulo:"Notificación",
     icono:<FaIcons.FaBell/>,
     ruta:"/AnuncioEstudiante",
     componente:AnuncioEstudiante,

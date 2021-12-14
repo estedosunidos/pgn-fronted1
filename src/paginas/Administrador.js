@@ -3,10 +3,18 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import React,{useState,useEffect} from "react";
 import  {API_ADMINISTRADOR,cabeceras} from "../store/constante"
 import axios from "axios";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Administrador(){
     const [Administradors,setAdministradors]=useState([])
     const [Administrado,setAdministrador]=useState({idAdministrador:0,Documento:" ",Nombre:" ",Apellido:" ",Nombre_de_Usuario:""})
     const [appState,setAppState]=useState(false)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const url=process.env.REACT_APP_API_URL+API_ADMINISTRADOR;
         axios.get(url,{headers:cabeceras})
@@ -31,7 +39,8 @@ function Administrador(){
         })
 
         .catch(error=>{
-            alert("El area y la ocupacion no fue editado")
+            setTextError("El area y la ocupacion no fue editado")
+            setShowError(true)
             console.log(error)
         })
     })
@@ -39,6 +48,11 @@ function Administrador(){
         setAdministrador({...Administrado,[prop]:event.target.value})
  
     }
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
+
     return(
         <div>
            <Autocomplete id="administrador" value={Administrado} 
@@ -75,6 +89,15 @@ function Administrador(){
                 <input value={Administrado.Ocupacion} onChange={handleChangeSemestre("Ocupacion")}></input> 
                 <button onClick={editarAreayOcupacion}>Editar</button>
             </div>
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

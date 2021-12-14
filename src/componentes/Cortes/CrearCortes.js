@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import DialogContentText from '@mui/material/DialogContentText';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';

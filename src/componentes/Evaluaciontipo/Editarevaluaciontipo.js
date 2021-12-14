@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField'
+import DialogContentText from '@mui/material/DialogContentText';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -64,7 +65,7 @@ function Editarevaluaciontipo(props){
             console.log(repuesta.data);
             props.editar();
         }) 
-        .catch(error=>{
+        .catchsetTextError(error=>{
             alert("El evaluacion tipo no fue editado")
             console.log(error)
         })

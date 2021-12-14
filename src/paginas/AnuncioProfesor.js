@@ -2,11 +2,19 @@ import React,{useEffect,useState} from "react";
 import  {API_DOCENTE,cabeceras,API_CURSO,API_ANUNCIO} from "../store/constante"
 import axios from "axios";
 import Anuncios from "../componentes/AnuncioProfesor/Anuncios"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function AnuncioProfesor(){
     const [asignaturas,setAsignaturas]=useState([])
     const [grupos,setGrupos]=useState([])
     const [consulta,setConsulta]=useState(false)
     const [grupo,setGrupo]=useState({})
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
         useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_DOCENTE+"/documento/"+documento
@@ -20,7 +28,8 @@ function AnuncioProfesor(){
         })
         .catch(error=>{
             console.log(error)
-            alert("La asignatura no pudieron ser cargadas")
+            setTextError("La asignatura no pudieron ser cargadas")
+            setShowError(true)
         })
     },[])
     const traergrupos=((Id)=>{
@@ -33,7 +42,8 @@ function AnuncioProfesor(){
         })
         .catch(error=>{
             console.log(error)
-            alert("Los grupo no fueron cargados")
+            setTextError("Los grupo no fueron cargados")
+            setShowError(true)
         })
 
     })
@@ -45,6 +55,10 @@ function AnuncioProfesor(){
             setConsulta(true)
 
         }
+    }
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
     }
     return(
         <div>
@@ -70,6 +84,15 @@ function AnuncioProfesor(){
         <div>
             {consulta && <Anuncios grupo={grupo}></Anuncios>}
         </div>
+        {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

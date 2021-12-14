@@ -4,8 +4,12 @@ import axios from "axios";
 import CrearAsignaturaDocente  from "./CrearAsignaturaDocente"
 import EditarAsisgnacionDocente  from "./EditarAsisgnacionDocente"
 import TableCustom from "../TableCustom"
-
-
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function AsignacionDocente(props){
     
     const [editar,setEditar]=useState(false)
@@ -62,8 +66,7 @@ function AsignacionDocente(props){
         <button onClick={mostracrearasignaciondocentes}>Nuevo</button>
         <TableCustom data={asignaciondocentes} borrar={borrarasignaciondocente} mostrar={mostraeditarasignaciondocente}></TableCustom>
         {editar && <EditarAsisgnacionDocente showModal={editar} cancelar={cancelar}  docente={props.docente} asignaciondocente={asignaciondocente} editar={editaasignaciondocente}> </EditarAsisgnacionDocente>}
-        {crear && <CrearAsignaturaDocente showModal={crear} docente={props.docente} cancelar={cancelar} crear={crearasignaciondocente}></CrearAsignaturaDocente>}
-        
+        {crear && <CrearAsignaturaDocente showModal={crear} docente={props.docente} cancelar={cancelar} crear={crearasignaciondocente}></CrearAsignaturaDocente>}  
 
 
     </div>

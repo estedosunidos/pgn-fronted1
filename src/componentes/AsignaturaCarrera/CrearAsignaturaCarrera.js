@@ -117,7 +117,7 @@ function CrearAsignaturaCarrera(props){
                                     <em>Seleccione</em>
                                 </MenuItem>
                                 {asignaturas.map((asignatura, index) => {
-                                    return <MenuItem key={index} value={asignatura.Id}>{asignatura.Asignatura}</MenuItem>
+                                    return <MenuItem key={index} value={asignatura.Id}>{asignatura.Asignaturas}</MenuItem>
                                 })}
                             </TextField>
 

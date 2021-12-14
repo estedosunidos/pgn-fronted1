@@ -21,7 +21,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import { useHistory } from "react-router-dom";
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),

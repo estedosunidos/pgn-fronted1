@@ -74,8 +74,8 @@ function  EditarUbicacion(props){
         }
         )
         .catch(error=>{
-            alert("Se ha presentado un error")
             console.log(error)
+            alert("Se ha presentado un error")
         })
 
     })

@@ -61,8 +61,7 @@ function CrearCarrera(props){
         const body={
             Nombre_Carrera:carrera.Nombre_Carrera,
             CantidadSemestre:carrera.CantidadSemestre,
-            TotalCredito:carrera.TotalCredito,
-            idAdministrador:JSON.parse(localStorage.getItem("perfil"))["idAdministrador"]
+            TotalCredito:carrera.TotalCredito
         }
         console.log(JSON.stringify(body));
         axios.post(url,body,{headers:cabeceras})

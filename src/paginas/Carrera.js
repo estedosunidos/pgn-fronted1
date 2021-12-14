@@ -4,13 +4,20 @@ import axios from "axios";
 import TableCustom from "../componentes/TableCustom"
 import EditarCarrera from "../componentes/carreras/EditarCarrera";
 import CrearCarrera from "../componentes/carreras/CrearCarrera";
-
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Carrrera(){
     const [carreras,setCarreras]=useState([]);
     const [appState,setAppState]=useState(false)
     const [editar,setEditar]=useState(false)
     const [carrera,setCarrera]=useState({})
     const [crear,setCrear]=useState(false)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const url=process.env.REACT_APP_API_URL+API_CARRERA;
         axios.get(url,{headers:cabeceras})
@@ -29,7 +36,8 @@ function Carrrera(){
         )
         .catch(error=>{
             console.log(error)
-            alert("La carrera no fue eliminada ")
+            setTextError("La carrera no fue eliminada ")
+            setShowError(true)
         })
     }
     );
@@ -53,6 +61,10 @@ function Carrrera(){
     const mostrarcrearcarrera=(()=>{
         setCrear(true)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <button onClick={mostrarcrearcarrera}>Nuevo</button>
@@ -60,7 +72,15 @@ function Carrrera(){
          
            {editar && <EditarCarrera showModal={editar} cancelar={cancelar} carrera={carrera} editar={editarcarrera}> </EditarCarrera>}
            {crear && <CrearCarrera   showModal={crear}  cancelar={cancelar} crear={crearcarrera} showModal={crear}></CrearCarrera>}
-
+           {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
            
         </div>
     )

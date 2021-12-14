@@ -2,7 +2,6 @@ import React,{useEffect,useState} from "react";
 import  {API_ANUNCIO,cabeceras}  from "../../store/constante"
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-
 function CrearAnuncio(props){
     const [anuncio,setAnucio]=useState({Mensaje:""})
     const handleChange=(prop)=>(events)=>{

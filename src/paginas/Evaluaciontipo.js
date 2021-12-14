@@ -4,12 +4,20 @@ import axios from "axios";
 import TableCustom from "../componentes/TableCustom"
 import Editarevaluaciontipo from "../componentes/Evaluaciontipo/Editarevaluaciontipo"
 import Crearevaluaciontipo from "../componentes/Evaluaciontipo/Crearevaluaciontipo"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Evaluaciontipo(){
     const [evaluaciontipos,setEvaluaciontipos]=useState([]);
     const [appState,setAppState]=useState(false)
     const [editar,setEditar]=useState(false)
     const [evaluaciontipo,setEvaluaciontipo]=useState({})
     const [crear,setCrear]=useState(false)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const url=process.env.REACT_APP_API_URL+API_EVALUACIONTIPO;
         axios.get(url,{headers:cabeceras})
@@ -28,7 +36,8 @@ function Evaluaciontipo(){
         )
         .catch(error=>{
             console.log(error)
-            alert("El tipo de evaluacion no fue eliminada ")
+            setTextError("El tipo de evaluacion no fue eliminada ")
+            setShowError(true)
         })
     }
     );
@@ -51,6 +60,10 @@ function Evaluaciontipo(){
     const mostrarcrearevaluaciontipo=(()=>{
         setCrear(true)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <button onClick={mostrarcrearevaluaciontipo}>Nuevo</button>
@@ -58,6 +71,15 @@ function Evaluaciontipo(){
            {editar && <Editarevaluaciontipo showModal={editar}  cancelar={cancelar} evaluaciontipo={evaluaciontipo} editar={editarevaluaciontipo}> </Editarevaluaciontipo>}
            
            {crear && <Crearevaluaciontipo  showModal={crear} cancelar={cancelar} crear={crearevaluaciontipo}></Crearevaluaciontipo>}
+           {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

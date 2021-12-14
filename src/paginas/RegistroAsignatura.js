@@ -3,6 +3,12 @@ import  {API_ESTUDIANTE,cabeceras,API_CARRERA,API_CURSO,API_ASIGNATURA} from "..
 import axios from "axios";
 import SeleccionarAsignatura from "../componentes/Asignatura/SeleccionarAsignatura";
 import AsignaturaMatriculada from "../componentes/Asignatura/AsignaturaMatriculada"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function RegistroAsignatura(){
     const [estudiante,setEstudiante]=useState({Carreras:[]})
     const [carrera,setCarrera]=useState({})
@@ -10,7 +16,8 @@ function RegistroAsignatura(){
     const [asignatura,setAsignatura]=useState({})
     const [mostraseleccionarasignatura,setMostraseleccionarasignatura]=useState(false)
     const [mostrarasignaturamatriculada,setMostrarasignaturamatriculada]=useState(false)
-    
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_ESTUDIANTE+"/documento/"+ documento
@@ -100,6 +107,10 @@ function RegistroAsignatura(){
             alert("no se pudo listar los curso exitosamente")
         })
     }
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return (
         <div>
             <h1>Registro de asignatura</h1>
@@ -128,6 +139,15 @@ function RegistroAsignatura(){
             </div>
             {mostraseleccionarasignatura && <SeleccionarAsignatura asignatura={asignatura} cancelar={cancelar} confirmar={confirmar}></SeleccionarAsignatura>}
             <AsignaturaMatriculada carrera={carrera}  appState={mostrarasignaturamatriculada} borrar={borrar}></AsignaturaMatriculada>
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

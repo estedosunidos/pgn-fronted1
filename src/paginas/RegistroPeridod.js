@@ -4,12 +4,20 @@ import TableCustom from "../componentes/TableCustom"
 import  {API_PERIODO,cabeceras} from "../store/constante"
 import Editarperiodo from "../componentes/Periodo/EditarPeriodo";
 import CrearPeriodo from "../componentes/Periodo/CrearPeriodo";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function RegistroPeridod(){
     const [appState,setAppState]=useState(false)
     const [crear,setCrear]=useState(false)
     const [editar,setEditar]=useState(false)
     const [periodo,setPeriodo]=useState({})
     const [periodos,setPeriodos]=useState([])
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     const borrarperiodo=((periods)=>{
         const url=process.env.REACT_APP_API_URL+API_PERIODO+"/"+periods.IdPeriodo;
         axios.delete(url,{headers:cabeceras})
@@ -20,7 +28,8 @@ function RegistroPeridod(){
         )
         .catch(error=>{
             console.log(error)
-            alert("El periodo  no fue eliminada ")
+            setTextError("El periodo  no fue eliminada ")
+            setShowError(true)
         })
     }
     );
@@ -53,13 +62,26 @@ function RegistroPeridod(){
     const mostracrearperiodo=(()=>{
         setCrear(true)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <h1>Registro periodo</h1>
             <button onClick={mostracrearperiodo}>Nuevo</button>
             <TableCustom data={periodos} mostrar={mostraeditarperiodo} borrar={borrarperiodo}></TableCustom>
-            {editar && <Editarperiodo cancelar={cancelar}   periodo={periodo} editar={editarperiodo}> </Editarperiodo>}
-            {crear && <CrearPeriodo cancelar={cancelar}   periodo={periodo} crear={crearperiodo}> </CrearPeriodo>}
+            {editar && <Editarperiodo showModal={editar} cancelar={cancelar}   periodo={periodo} editar={editarperiodo}> </Editarperiodo>}
+            {crear && <CrearPeriodo showModal={crear} cancelar={cancelar}   periodo={periodo} crear={crearperiodo}> </CrearPeriodo>}
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

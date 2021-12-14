@@ -4,6 +4,12 @@ import axios from "axios";
 import TableCustom from "../TableCustom"
 import EditarAnuncio from "./EditarAnuncio";
 import CrearAnuncio from "./CrearAnuncio"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function Anuncios(props){
     const [anuncios,setAnuncios]=useState([])
     const [anuncio,setAnuncio]=useState({})

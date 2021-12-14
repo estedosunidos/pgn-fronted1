@@ -2,6 +2,12 @@ import axios from "axios";
 import React,{useState,useEffect} from "react";
 import moment from "moment"
 import  {API_UBICACION,cabeceras,API_FRANJAS} from "../../store/constante"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function EditarFlanjar(props){
     const [ubicaciones,setUbicaciones]=useState([])
     const [franja,setFranja]=useState(props.franja1)

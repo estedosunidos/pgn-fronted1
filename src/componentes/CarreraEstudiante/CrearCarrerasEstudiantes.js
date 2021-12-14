@@ -112,7 +112,7 @@ function CrearAsignaturaDocente(props){
                                     <em>Seleccione</em>
                                 </MenuItem>
                                 {carreras.map((carrera, index) => {
-                                    return <MenuItem key={index} value={carrera.Id}>{carrera["Carrera"]}</MenuItem>
+                                    return <MenuItem key={index} value={carrera.Id}>{carrera["Carreras"]}</MenuItem>
                                 })}
                             </Select>
 
@@ -129,7 +129,6 @@ function CrearAsignaturaDocente(props){
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-                
         </div>
     )
 }

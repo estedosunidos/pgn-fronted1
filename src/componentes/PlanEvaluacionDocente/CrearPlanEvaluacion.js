@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { API_PLANDEEVALUACION, cabeceras, API_EVALUACIONTIPO, API_DOCENTE, API_CORTE } from "../../store/constante"
 import axios from "axios";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function CrearPlanEvaluacion(props) {
     const [planevaluacion, setPlanevaluacion] = useState({})
     const [evaluacionTipos, setEvaluacionTipos] = useState([])

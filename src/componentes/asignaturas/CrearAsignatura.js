@@ -14,7 +14,9 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField'
+import ButtonBase from '@mui/material/ButtonBase'
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -63,8 +65,7 @@ function CrearAsignatura(props){
             Descripcion:asignatura.Descripcion,
             Unidad_de_credito:asignatura.Unidad_de_credito,
             Observacion:asignatura.Observacion,
-            Contenido:asignatura.Contenido,
-            idAdministrador:JSON.parse(localStorage.getItem("perfil"))["idAdministrador"]
+            Contenido:asignatura.Contenido
         }
     
         console.log(JSON.stringify(body));
@@ -111,8 +112,9 @@ function CrearAsignatura(props){
                         <FormControl fullWidth>
                             <TextField id="standard-basic6"name="Contenido"  label={'Contenido'} margin="normal" value={asignatura.Contenido} onChange={handleChange("Contenido")} />
                         </FormControl>
+                            <ButtonBase component={Paper}><input type="file"></input></ButtonBase>
                     </Box>
-
+                    
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" autoFocus onClick={crearasignaturas}>

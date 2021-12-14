@@ -61,7 +61,6 @@ function CrearUsuario(props) {
     const [perfiles, setPerfiles] = useState([])
     const [perfil, setPerfil] = useState({})
 
-
     useEffect(() => {
         const url = process.env.REACT_APP_API_URL + API_PERFIL;
         axios.get(url, { headers: cabeceras })
@@ -92,8 +91,8 @@ function CrearUsuario(props) {
                 props.crear();
             })
             .catch(error => {
-                alert("El usuario no fue creado")
                 console.log(error)
+                alert("El usuario no fue creado")
             })
     })
     const handleChange = (prop) => (event) => {
@@ -138,6 +137,28 @@ function CrearUsuario(props) {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
+                        <FormControl fullWidth>
+                            <TextField id="standard-basic4" name="Email" label={'Email'} margin="normal" value={usuario.Email} onChange={handleChange("Email")} />
+                        </FormControl>
+                        <FormControl fullWidth>
+
+                            <TextField name="perfiles"
+                                select
+                                label={'Perfil'} margin="normal"
+                                value={usuario.Perfil}
+                                defaultValue=" " onChange={handleChange("Perfil")}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem value=" " disabled selected>
+                                    <em>Seleccione</em>
+                                </MenuItem>
+                                {perfiles.map((perfil, index) => {
+                                    return <MenuItem key={index} value={perfil.idperfil}>{perfil.descricion}</MenuItem>
+                                })}
+                            </TextField>
+
+                        </FormControl>
                     </Box>
 
                 </DialogContent>

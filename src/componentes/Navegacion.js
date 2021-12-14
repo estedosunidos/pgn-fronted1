@@ -13,11 +13,11 @@ function Navegacion() {
     const perfil = JSON.parse(localStorage.getItem("perfil"))
     useEffect(() => {
         if (perfil.idperfil === 2) {
-            setMenu(MenuDato.filter((ruta, index) => ruta.IsAdministrativo))
+            setMenu(MenuDato.filter((ruta) => ruta.IsAdministrativo))
         } else if (perfil.idperfil === 4) {
-            setMenu(MenuDato.filter((ruta, index) => ruta.IsDocente))
+            setMenu(MenuDato.filter((ruta) => ruta.IsDocente))
         } else if (perfil.idperfil === 3) {
-            setMenu(MenuDato.filter((ruta, index) => ruta.IsEstudiante))
+            setMenu(MenuDato.filter((ruta) => ruta.IsEstudiante))
         }
     }, [])
     return (

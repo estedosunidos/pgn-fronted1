@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 
@@ -91,7 +89,7 @@ function  EditarCarrera(props){
 
                     <Box sx={{ minWidth: 400 }}>
                         <FormControl fullWidth>
-                            <TextField id="standard-basic1"name="Nombre carrera" label={'Nombre carrera'} margin="normal" value={carrera.Carrera} onChange={handleChange("Carrera")} />
+                            <TextField id="standard-basic1"name="Nombre carrera" label={'Nombre carrera'} margin="normal" value={carrera.Carreras} onChange={handleChange("Carreras")} />
                         </FormControl>
                         <FormControl fullWidth>
                             <TextField id="standard-basic2"name="Cantidad de semetres"  label={'Cantidad de semetres'} margin="normal" value={carrera.Semestres} onChange={handleChange("Semestres")} />

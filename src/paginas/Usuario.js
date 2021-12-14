@@ -4,12 +4,20 @@ import axios from "axios";
 import TableCustom from "../componentes/TableCustom"
 import EditarUsuario from "../componentes/usuario/EditaUsuario";
 import CrearUsuario from "../componentes/usuario/CrearUsuario";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Usuario(){
     const [usuarios,setUsuarios]=useState([]);
     const [appState,setAppState]=useState(false)
     const [editar,setEditar]=useState(false)
     const [usuario,setUsuario]=useState({})
     const [crear,setCrear]=useState(false)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     const borrarusuario=((usuario)=>{
         const url=process.env.REACT_APP_API_URL+API_USUARIO+"/"+usuario.Documento;
         axios.delete(url,{headers:cabeceras})
@@ -20,7 +28,8 @@ function Usuario(){
         )
         .catch(error=>{
             console.log(error)
-            alert("El usuario no fue eliminado ")
+            setTextError("El usuario no fue eliminado ")
+            setShowError(true)
         })
     }
     );
@@ -51,12 +60,25 @@ function Usuario(){
     const mostrarcrearusuario=(()=>{
         setCrear(true)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <button onClick={mostrarcrearusuario}>Nuevo</button>
            <TableCustom data={usuarios} borrar={borrarusuario} mostrar={mostraeditarusuario}></TableCustom>
            {editar && <EditarUsuario  showModal={editar}  cancelar={cancelar} usuario={usuario} editar={editarusuario} mostrar={mostraeditarusuario}> </EditarUsuario>}
            {crear && <CrearUsuario showModal={crear} cancelar={cancelar} crear={crearusuario}></CrearUsuario>}
+           {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

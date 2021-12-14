@@ -1,6 +1,12 @@
 import React,{useEffect,useState} from "react";
 import  {API_CURSO,cabeceras} from "../../store/constante"
 import axios from "axios";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function SeleccionarAsignatura(props){
     const [cursos,setCursos]=useState([])
     const [curso,setCurso]=useState()
@@ -15,6 +21,7 @@ function SeleccionarAsignatura(props){
         .catch(error=>{
             console.log(error)
             alert("No se adiccionaro la asignatura buscada")
+
         })
     },[])
     const handleChange=(prop)=>(event)=>{

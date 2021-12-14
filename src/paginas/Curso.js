@@ -4,12 +4,20 @@ import axios from "axios";
 import TableCustom from "../componentes/TableCustom"
 import Editarcurso from "../componentes/cursos/EditarCurso"
 import CrearCurso from "../componentes/cursos/CrearCurso";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Curso(){
     const [appState,setAppState]=useState(false)
     const [editar,setEditar]=useState(false)
     const [crear,setCrear]=useState(false)
     const [cursos,setCursos]=useState([])
     const [curso,setCurso]=useState({})
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     const borrarcurso=((cursos)=>{
         const url=process.env.REACT_APP_API_URL+API_CURSO+"/"+cursos.Id
         console.log(cursos)
@@ -21,7 +29,8 @@ function Curso(){
         )
         .catch(error=>{
             console.log(error)
-            alert("El curso  no fue eliminado ")
+            setTextError("El curso  no fue eliminado ")
+            setShowError(true)
         })
     }
     );
@@ -53,12 +62,25 @@ function Curso(){
         setEditar(false)
         setCrear(false)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <button onClick={mostracrearacurso}>Nuevo</button>
             <TableCustom data={cursos} borrar={borrarcurso} mostrar={mostrareditarcurso}></TableCustom>
-            {editar && <Editarcurso cancelar={cancelar}   curso={curso} editar={editarcurso}> </Editarcurso>}
-            {crear && <CrearCurso cancelar={cancelar}   curso={curso} crear={crearcurso}> </CrearCurso>}
+            {editar && <Editarcurso showModal={editar} cancelar={cancelar}   curso={curso} editar={editarcurso}> </Editarcurso>}
+            {crear && <CrearCurso showModal={crear} cancelar={cancelar}   curso={curso} crear={crearcurso}> </CrearCurso>}
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

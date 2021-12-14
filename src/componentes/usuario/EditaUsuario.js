@@ -78,8 +78,8 @@ function EditarUsuario(props){
             props.editar();
         })
         .catch(error=>{
-            alert("El usuario no fue editado")
             console.log(error)
+            alert("El usuario no fue editado")
         })
     })
     const handleChange=(prop)=>(event)=>{

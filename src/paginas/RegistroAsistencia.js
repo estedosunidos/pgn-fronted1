@@ -2,12 +2,20 @@ import React,{useEffect,useState} from "react";
 import  {API_DOCENTE,cabeceras,API_CURSO,API_ASISTENCIA} from "../store/constante"
 import axios from "axios";
 import Checkbox from '@mui/material/Checkbox'
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function RegistroAsistencia(){
     const [asignaturas,setAsignaturas]=useState([])
     const [grupos,setGrupos]=useState([])
     const [asistencia,setAsistencia]=useState({Fecha:"",Grupo:""})
     const [docente,setDocente]=useState({})
     const [estudiantes,setEstudiantes]=useState([])
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_DOCENTE+"/documento/"+documento
@@ -22,7 +30,9 @@ function RegistroAsistencia(){
         })
         .catch(error=>{
             console.log(error)
-            alert("La asignatura no pudieron ser cargadas")
+            setTextError("La asignatura no pudieron ser cargadas")
+            setShowError(true)
+
         })
     },[])
     const traergrupos=((Id)=>{
@@ -35,7 +45,9 @@ function RegistroAsistencia(){
         })
         .catch(error=>{
             console.log(error)
-            alert("Los grupo no fueron cargados")
+            setTextError("Los grupo no fueron cargados")
+            setShowError(true)
+
         })
 
     })
@@ -70,7 +82,8 @@ function RegistroAsistencia(){
         })
         .catch(error=>{
             console.log(error)
-            alert("El listado no fue cargado")
+            setTextError("El listado no fue cargado")
+            setShowError(true)
         })
 
     })
@@ -97,6 +110,10 @@ function RegistroAsistencia(){
             })
         })) 
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return (
         <div>
             <lavel>Registro de Asistencia</lavel>
@@ -141,6 +158,15 @@ function RegistroAsistencia(){
             <div>
                 <button onClick={guarda}>Enviar</button>
             </div>
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

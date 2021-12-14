@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField'
+import DialogContentText from '@mui/material/DialogContentText';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -52,7 +53,6 @@ BootstrapDialogTitle.propTypes = {
 };
 function Crearevaluaciontipo(props){
     const [open, setOpen] = React.useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };

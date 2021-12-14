@@ -1,12 +1,19 @@
 import axios from "axios";
 import React,{useState,useEffect} from "react";
 import  {API_CARRERAESTUDIANTE,cabeceras,API_CARRERA} from "../../store/constante"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function EditarCarreraEstudiante(props){
     const [carreraestudiante,setCarreraestudiante]=useState({})
     const [carreras,setCarreras]=useState([])
     useEffect(()=>{
+        console.log(props.carreraestudiante.Id)
         const urlcarrera=process.env.REACT_APP_API_URL+API_CARRERA;
-        const urlasignacioncarrera=process.env.REACT_APP_API_URL+API_CARRERA+"/carreraestudiante/"+props.carreraestudiante.idCarrera
+        const urlasignacioncarrera=process.env.REACT_APP_API_URL+API_CARRERA+"/carreraestudiante/"+props.carreraestudiante.Id
         const axiocarrera= axios.get(urlcarrera,{headers:cabeceras})
         const axioasignacioncarrera= axios.get(urlasignacioncarrera,{headers:cabeceras})
         axios.all([axiocarrera,axioasignacioncarrera])
@@ -40,8 +47,7 @@ function EditarCarreraEstudiante(props){
         const url=process.env.REACT_APP_API_URL+API_CARRERAESTUDIANTE+"/"+ props.carreraestudiante.Id;
         const body={
             IdEstudiante:props.estudiante["idEstudiantes"],
-            IdCarrera:carreraestudiante.Carrera
-
+            IdCarrera:carreraestudiante.Carreras
         }
         console.log(JSON.stringify(body));
         axios.put(url,body,{headers:cabeceras})
@@ -61,13 +67,13 @@ function EditarCarreraEstudiante(props){
         <div>
                 <form onSubmit={editarCarreraEstudiante}>
                 <div>
-                    <h2>Actualizar el estudio realizado del docente </h2>
+                    <h2>Actualizar la carrera al estudiante </h2>
                 </div>
                 <label>Asignatura</label>
-                <select name="carrera" onChange={handleChange("Carrera")}>
+                <select name="carrera" onChange={handleChange("Carreras")}>
                         <option value=" " disabled>seleccione</option>
                         {carreras.map((carrera,index)=>{
-                            return <option key={index} value={carrera.Id} selected={carrera.Id ==carreraestudiante.IdCarrera  ? true : false}>{carrera.Carrera}</option>   
+                            return <option key={index} value={carrera.Id} selected={carrera.Id ==carreraestudiante.IdCarrera  ? true : false}>{carrera.Carreras}</option>   
                         })}
                         </select>
                     <button  type="submit"> Editar</button>

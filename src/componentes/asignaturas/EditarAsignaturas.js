@@ -59,7 +59,7 @@ function EditarAsignaturas(props){
         event.preventDefault()
         const url=process.env.REACT_APP_API_URL+API_ASIGNATURA+"/"+asignatura.Id;
         const body={
-            Nombre_Asignatura:asignatura.Asignatura,
+            Nombre_Asignatura:asignatura.Asignaturas,
             Semestre:asignatura.Semestre,
             Descripcion:asignatura.Descripcion,
             Unidad_de_credito:asignatura.Creditos,
@@ -78,7 +78,6 @@ function EditarAsignaturas(props){
             alert("Se ha presentado un error")
             console.log(error)
         })
-
     })
     const handleChange=(prop)=>(event)=>{
         setAsignatura({...asignatura,[prop]:event.target.value})
@@ -96,10 +95,10 @@ function EditarAsignaturas(props){
 
                     <Box sx={{ minWidth: 400 }}>
                         <FormControl fullWidth>
-                            <TextField id="standard-basic1"name="Nombre Asignatura" label={'Nombre Asignatura'} margin="normal" value={asignatura.Asignatura} onChange={handleChange("Asignatura")} />
+                            <TextField id="standard-basic1"name="Nombre Asignatura" label={'Nombre Asignatura'} margin="normal" value={asignatura.Asignaturas} onChange={handleChange("Asignaturas")} />
                         </FormControl>
                         <FormControl fullWidth>
-                            <TextField id="standard-basic2"name="Semestre"  label={'Semestre'} margin="normal" value={asignatura.Semestre} onChange={handleChange("Semestres")} />
+                            <TextField id="standard-basic2"name="Semestre"  label={'Semestre'} margin="normal" value={asignatura.Semestre} onChange={handleChange("Semestre")} />
                         </FormControl>
                         <FormControl fullWidth>
                             <TextField id="standard-basic3"name="Descripcion" label={'Descripcion'} margin="normal" value={asignatura.Descripcion} onChange={handleChange("Descripcion")} />
@@ -113,10 +112,7 @@ function EditarAsignaturas(props){
                         <FormControl fullWidth>
                             <TextField id="standard-basic3"name="Contenido" label={'Contenido'} margin="normal" value={asignatura.Contenido} onChange={handleChange("Contenido")} />
                         </FormControl>
-                        
-
                     </Box>
-
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" autoFocus onClick={editarasignatura}>

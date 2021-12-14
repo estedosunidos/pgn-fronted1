@@ -1,5 +1,11 @@
 import React,{useEffect,useState} from "react";
 import  {API_NOTAS,cabeceras,API_CURSO,API_CORTE,API_DOCENTE} from "../store/constante"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import axios from "axios";
 function ResgistroNotas(){
     const [asignaturas,setAsignaturas]=useState([])
@@ -10,7 +16,8 @@ function ResgistroNotas(){
     const [docente,setDocente]=useState({})
     const [asignaturacorte,setAsignaturacorte]=useState({Corte:0,Asignatura:0,Grupo:"",Actividad:0})
     const [appState,setAppState]=useState(false)
-
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const urlasignatura=process.env.REACT_APP_API_URL+API_DOCENTE+"/documento/"+documento
@@ -36,9 +43,11 @@ function ResgistroNotas(){
              errores.map((error,index)=>{
                  console.log(error)
                  if (index===0){
-                     alert("El tipo de evaluacion no fueron listada")
+                    setTextError("El tipo de evaluacion no fueron listada")
+                    setShowError(true)
                  }else if(index===1){
-                     alert("La asignatura no fueron cargadas")
+                    setTextError("La asignatura no fueron cargadas")
+                    setShowError(true)
                  }
              })
          })) 
@@ -53,7 +62,8 @@ function ResgistroNotas(){
         })
         .catch(error=>{
             console.log(error)
-            alert("Los grupò no fueron cargados")
+            setTextError("Los grupò no fueron cargados")
+            setShowError(true)
         })
     
     })
@@ -66,7 +76,8 @@ function ResgistroNotas(){
         })
         .catch(error=>{
             console.log(error)
-            alert("Las actividades  no fueron cargados")
+            setTextError("Las actividades  no fueron cargados")
+            setShowError(true)
         })
     }
     const handleChange=(prop)=>(event)=>{
@@ -108,7 +119,8 @@ function ResgistroNotas(){
         })
         .catch(error=>{
             console.log(error)
-            alert("El listado no fue cargado")
+            setTextError("El listado no fue cargado")
+            setShowError(true)
         })
 
     })
@@ -139,6 +151,10 @@ function ResgistroNotas(){
         }))  
         setAppState(true)
     })
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     return(
         <div>
             <lavel>Registro de Notas</lavel>
@@ -191,6 +207,15 @@ function ResgistroNotas(){
             <div>
                 <button onClick={guarda}>Enviar</button>
             </div>
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

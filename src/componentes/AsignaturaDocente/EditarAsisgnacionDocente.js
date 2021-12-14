@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import DialogContentText from '@mui/material/DialogContentText';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -83,8 +84,10 @@ function EditarAsisgnacionDocente(props){
                 console.log(error)
                 if (index===0){
                     alert("La asignatura  no fueron listada")
+
                 }else if(index===1){
                     alert("")
+
                 }
             })
         })) 
@@ -140,7 +143,7 @@ function EditarAsisgnacionDocente(props){
                                     <em>Seleccione</em>
                                 </MenuItem>
                                 {asignaturas.map((asignatura, index) => {
-                                    return <MenuItem key={index} value={asignatura.Id} selected={asignatura.Id == asignaciondocente.Id ? true : false}>{asignatura.Asignatura}</MenuItem>
+                                    return <MenuItem key={index} value={asignatura.Id} selected={asignatura.Id == asignaciondocente.Id ? true : false}>{asignatura.Asignaturas}</MenuItem>
                                 })}
                             </TextField>
 
@@ -157,7 +160,6 @@ function EditarAsisgnacionDocente(props){
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-
         </div>
     )
 }

@@ -1,6 +1,29 @@
 import React,{useEffect,useState} from "react";
 import  {API_ASIGNATURA,cabeceras,API_PERIODO,API_NOTAS} from "../../store/constante"
 import axios from "axios";
+import Table from '@mui/material/Table'
+import { styled } from '@mui/material/styles';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.primary.dark,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
 function ConsultarNotasPorAsignatura(props){
     const [asignaturas,setAsignaturas]=useState([])
     const [asignatura,setAsignatura]=useState({})
@@ -71,16 +94,16 @@ function ConsultarNotasPorAsignatura(props){
             <button onClick={consultar}>Consulta</button>
             {nota.notas.map((nota,index)=>{
                 return <div key={index}><div><label>{nota.Descripcion}</label>
-                <table><thead><tr><td>Actividad</td><td>Nota</td></tr></thead><tbody>
+                <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 500 }} aria-label="customized table"><TableHead><TableRow><StyledTableCell>Actividad</StyledTableCell><StyledTableCell>Nota</StyledTableCell></TableRow></TableHead><TableBody>
                 {nota.calificaciones.map((califica,index1)=>{
-                    return <tr  key={index1} ><td>{califica.Descripcion}</td><td>{califica.Calificacion}</td></tr>
+                    return <TableRow  key={index1} ><StyledTableCell>{califica.Descripcion}</StyledTableCell><StyledTableCell>{califica.Calificacion}</StyledTableCell></TableRow>
                 })}
-                </tbody></table>
+                </TableBody></Table></TableContainer>
                 <label>Total Corte: {nota.totalcorte.Notacorte}</label>
                 </div></div>
             })}
-            <label>Total Promedio Asignatura: {nota.totalpromedioasignatura}</label>                                                                                                                                                                                                                                               
-                   
+            <label>Total Promedio Asignatura: {nota.totalpromedioasignatura}</label>                                                                                                                                                                                                                                                    
         </div>                    
     )
 }

@@ -4,6 +4,12 @@ import axios from "axios";
 import CrearCarrerasEstudiantes  from "./CrearCarrerasEstudiantes"
 import EditarCarreraEstudiante  from "./EditarCarreraEstudiante"
 import TableCustom from "../TableCustom"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 function CarreraEstudiantes(props){
     const [editar,setEditar]=useState(false)
     const [appState,setAppState]=useState(false)
@@ -61,6 +67,7 @@ function CarreraEstudiantes(props){
         <TableCustom data={carreraestudiantes} borrar={borrarasignaciondocente} mostrar={mostraeditarcarreraestudiante}></TableCustom>
         {crear && <CrearCarrerasEstudiantes showModal={crear} estudiante={props.estudiante}  cancelar={cancelar} crear={crearcarreraestudiante}></CrearCarrerasEstudiantes>}
         {editar && <EditarCarreraEstudiante cancelar={cancelar} estudiante={props.estudiante} carreraestudiante={carreraestudiante} editar={editaasignaciondocente}> </EditarCarreraEstudiante>}
+
     </div>
     )
 }

@@ -3,11 +3,19 @@ import  {API_ESTUDIANTE,cabeceras,API_CARRERA,API_CURSO} from "../store/constant
 import axios from "axios";
 import ConsultarNotasPorAsignatura from "../componentes/ConsultarNotas/ConsultarNotasPorAsignatura";
 import ReportesAcademicos from "../componentes/ConsultarNotas/ReportesAcademicos";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function Consultarnotas(){
     const [estudiante,setEstudiante]=useState({Carreras:[]})
     const [carrera,setCarrera]=useState({})
     const [mostrareporteacademico,setMostrareporteacademico]=useState(false)
     const [mostrarconsultarnotas,setMostrarconsultarnotas]=useState(false)
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_ESTUDIANTE+"/documento/"+ documento
@@ -21,7 +29,8 @@ function Consultarnotas(){
         })
         .catch(error=>{
             console.log(error)
-            alert("El estudiante no fue cargado")
+            setTextError("El estudiante no fue cargado")
+            setShowError(true)
         })
     },[])
     const handleChange=(prop)=>(event)=>{
@@ -37,6 +46,10 @@ function Consultarnotas(){
                 setMostrareporteacademico(true)
             }
         }
+    }
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
     }
     return(
         <div>
@@ -61,7 +74,16 @@ function Consultarnotas(){
                 <option value="Reportes" >Reportes Academico</option>
             </select>
             {mostrarconsultarnotas && <ConsultarNotasPorAsignatura estudiante={estudiante}></ConsultarNotasPorAsignatura>} 
-            {mostrareporteacademico && <ReportesAcademicos estudiante={estudiante}></ReportesAcademicos>}
+            {mostrareporteacademico && <ReportesAcademicos estudiante={estudiante} carrera={carrera}></ReportesAcademicos>}
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

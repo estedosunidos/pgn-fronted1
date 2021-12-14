@@ -1,10 +1,18 @@
 import React,{useState,useEffect} from "react"
 import {API_DOCENTE,cabeceras,API_CORTE} from "../store/constante"
 import axios from "axios";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 function CortesAsignatura(){
     const [asignaturas,setAsignaturas]=useState([])
     const [asignatura,setAsignatura]=useState()
     const [porcentajes,setPorcentajes]=useState([])
+    const [showError, setShowError] = useState(false)
+    const [textError, setTextError] = useState("")
     useEffect(()=>{
         const documento =localStorage.getItem("documento")
         const url=process.env.REACT_APP_API_URL+API_DOCENTE+"/documento/"+documento
@@ -16,7 +24,8 @@ function CortesAsignatura(){
         })
          .catch((error)=>{
                  console.log(error)
-                 alert("La asignatura no pudieron ser cargadas")
+                 setTextError("La asignatura no pudieron ser cargadas")
+                 setShowError(true)
                 
          })
     },[])
@@ -39,6 +48,10 @@ function CortesAsignatura(){
             })
         }
     }
+    const handleClose = () => {
+        setShowError(false)
+        setTextError("")
+    }
     const consultarcorte=((Id)=>{
         const url =process.env.REACT_APP_API_URL+ API_CORTE+"/asignaturacorte/"+Id
         axios.get(url,{headers:cabeceras})
@@ -48,7 +61,8 @@ function CortesAsignatura(){
         })
         .catch((error)=>{
             console.log(error)
-            alert("Los corte no puedo ser consultado")
+            setTextError("Los corte no puedo ser consultado")
+            setShowError(true)
         })
     })
     const guarda=(()=>{
@@ -93,6 +107,15 @@ function CortesAsignatura(){
                 <div>
                 <button onClick={guarda}>Enviar</button>
             </div>
+            {showError && <Dialog onClose={handleClose} open={showError}>
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>}
         </div>
     )
 }

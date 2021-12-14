@@ -57,8 +57,6 @@ BootstrapDialogTitle.propTypes = {
 function CrearAsignaturaDocente(props) {
     const [asignaciondocente, setAsignaciondocente] = useState({})
     const [asignaturas, setAsignaturas] = useState([])
-    const [showError, setShowError] = useState(false)
-    const [textError, setTextError] = useState("")
 
     useEffect(() => {
         const url = process.env.REACT_APP_API_URL + API_ASIGNATURA;
@@ -69,8 +67,7 @@ function CrearAsignaturaDocente(props) {
             })
             .catch(error => {
                 console.log(error)
-                setTextError("Se presentó un error cargando las asignaturas")
-                setShowError(true)
+                alert("Se presentó un error cargando las asignaturas")
             })
     }, []);
 
@@ -90,8 +87,7 @@ function CrearAsignaturaDocente(props) {
             })
             .catch(error => {
                 console.log(error)
-                setTextError("Se presentó un error asociando la asignatura al docente")
-                setShowError(true)
+                alert("Se presentó un error asociando la asignatura al docente")
             })
     })
 
@@ -99,10 +95,6 @@ function CrearAsignaturaDocente(props) {
         setAsignaciondocente({ ...asignaciondocente, [prop]: event.target.value })
     }
 
-    const handleClose = () => {
-        setShowError(false)
-        setTextError("")
-    }
 
     return (
         <div>
@@ -130,7 +122,7 @@ function CrearAsignaturaDocente(props) {
                                     <em>Seleccione</em>
                                 </MenuItem>
                                 {asignaturas.map((asignatura, index) => {
-                                    return <MenuItem key={index} value={asignatura.Id}>{asignatura.Asignatura}</MenuItem>
+                                    return <MenuItem key={index} value={asignatura.Id}>{asignatura.Asignaturas}</MenuItem>
                                 })}
                             </TextField>
 
@@ -147,16 +139,6 @@ function CrearAsignaturaDocente(props) {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-
-            {showError && <Dialog onClose={handleClose} open={showError}>
-                <DialogTitle>Error</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-error">{textError}</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button color="primary" onClick={handleClose}>Cerrar</Button>
-                </DialogActions>
-            </Dialog>}
         </div>
     )
 }
